@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste4Energy - Template 3 W4E Brand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* W4E Brand Colors */
+            --cyan-sky: #1AB6E8;
+            --teal-mid: #1E7586;
+            --forest-green: #399661;
+            --sapling-green: #8FC85F;
+            --soil-brown: #352D21;
+            --white: #FFFFFF;
+            --cool-blue: #D0EAF4;
+
+            /* Derived colors */
+            --text-dark: #352D21;
+            --text-gray: #5A5347;
+            --bg-light: #F8FAFB;
+            --border-light: #E5EAED;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            background: var(--white);
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .overline {
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--cyan-sky);
+            margin-bottom: 1.25rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .logo {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--teal-mid);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--cyan-sky);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan-sky);
+        }
+
+        .nav-cta {
+            color: var(--teal-mid);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding-bottom: 4px;
+            border-bottom: 2px solid var(--cyan-sky);
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            color: var(--cyan-sky);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 70px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 75% center;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(53, 45, 33, 0.8) 0%, rgba(53, 45, 33, 0.5) 50%, rgba(53, 45, 33, 0.2) 100%);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            background: var(--cool-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--teal-mid);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 6rem 5%;
+            max-width: 700px;
+        }
+
+        .hero-content .overline {
+            color: var(--sapling-green);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            color: var(--white);
+            margin-bottom: 1.75rem;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 480px;
+            margin-bottom: 3rem;
+            line-height: 1.9;
+            font-weight: 400;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .hero-cta::after {
+            content: '→';
+            font-size: 1.25rem;
+            color: var(--sapling-green);
+            transition: transform 0.3s;
+        }
+
+        .hero-cta:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* Intro Section */
+        .intro {
+            padding: 8rem 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .intro-content {
+            max-width: 480px;
+        }
+
+        .intro h2 {
+            font-size: 2.75rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .intro-text {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.9;
+        }
+
+        .intro-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .intro-stat {
+            padding-left: 1.5rem;
+            border-left: 2px solid var(--cyan-sky);
+        }
+
+        .stat-value {
+            font-family: 'Sora', sans-serif;
+            font-size: 3.25rem;
+            font-weight: 700;
+            color: var(--teal-mid);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.8125rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Problem Section */
+        .problem {
+            background: var(--soil-brown);
+            color: var(--white);
+            padding: 7rem 5%;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 5rem;
+        }
+
+        .problem-header .overline {
+            color: var(--sapling-green);
+        }
+
+        .problem h2 {
+            font-size: 2.5rem;
+            color: var(--white);
+        }
+
+        .problem-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .problem-item {
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .problem-number {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--sapling-green);
+            margin-bottom: 1.25rem;
+        }
+
+        .problem-item h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .problem-item p {
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 8rem 5%;
+        }
+
+        .solution-header {
+            max-width: 550px;
+            margin-bottom: 5rem;
+        }
+
+        .solution h2 {
+            font-size: 2.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .solution-intro {
+            font-size: 1.0625rem;
+            color: var(--text-gray);
+            line-height: 1.9;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .solution-image {
+            height: 600px;
+        }
+
+        .solution-features {
+            padding-top: 2rem;
+        }
+
+        .feature-item {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-light);
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .feature-number {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--teal-mid);
+        }
+
+        .feature-item h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            font-size: 0.9375rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 7rem 5%;
+            background: var(--cool-blue);
+        }
+
+        .process-header {
+            text-align: center;
+            max-width: 550px;
+            margin: 0 auto 5rem;
+        }
+
+        .process h2 {
+            font-size: 2.75rem;
+        }
+
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .process-flow::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            right: 80px;
+            height: 2px;
+            background: var(--teal-mid);
+        }
+
+        .process-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            max-width: 180px;
+        }
+
+        .step-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid var(--teal-mid);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Sora', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--teal-mid);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+        }
+
+        .process-step:hover .step-circle {
+            background: var(--cyan-sky);
+            border-color: var(--cyan-sky);
+            color: var(--white);
+        }
+
+        .step-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            font-size: 0.8125rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* Waste Streams Section */
+        .waste-streams {
+            padding: 8rem 5%;
+        }
+
+        .waste-streams-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 5rem;
+        }
+
+        .waste-streams-header {
+            position: sticky;
+            top: 120px;
+        }
+
+        .waste-streams h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .waste-streams-intro {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.9;
+        }
+
+        .streams-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stream-item {
+            padding: 2rem;
+            background: var(--bg-light);
+            transition: all 0.3s;
+        }
+
+        .stream-item:hover {
+            background: var(--cool-blue);
+        }
+
+        .stream-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--forest-green);
+            margin-bottom: 1.25rem;
+        }
+
+        .stream-item h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .stream-item p {
+            font-size: 0.8125rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* Industries Section */
+        .industries {
+            padding: 7rem 5%;
+            background: var(--cool-blue);
+        }
+
+        .industries-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .industries-content {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--white);
+        }
+
+        .industries h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .industries-text {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
+        }
+
+        .industry-list {
+            list-style: none;
+        }
+
+        .industry-list li {
+            padding: 1.125rem 0;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .industry-list li:hover {
+            padding-left: 0.75rem;
+            color: var(--cyan-sky);
+        }
+
+        .industry-list li::after {
+            content: '→';
+            opacity: 0;
+            color: var(--cyan-sky);
+            transition: opacity 0.3s;
+        }
+
+        .industry-list li:hover::after {
+            opacity: 1;
+        }
+
+        .industries-image {
+            height: 100%;
+            min-height: 550px;
+        }
+
+        /* Why W4E Section */
+        .why-w4e {
+            padding: 8rem 5%;
+        }
+
+        .why-w4e-header {
+            text-align: center;
+            max-width: 550px;
+            margin: 0 auto 5rem;
+        }
+
+        .why-w4e h2 {
+            font-size: 2.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .why-w4e-intro {
+            font-size: 1.0625rem;
+            color: var(--text-gray);
+            line-height: 1.9;
+        }
+
+        .benefits-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            border-top: 1px solid var(--border-light);
+            border-left: 1px solid var(--border-light);
+        }
+
+        .benefit-item {
+            padding: 2.5rem;
+            border-right: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            transition: background 0.3s;
+        }
+
+        .benefit-item:hover {
+            background: var(--cool-blue);
+        }
+
+        .benefit-number {
+            font-family: 'Sora', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--teal-mid);
+            margin-bottom: 1.25rem;
+        }
+
+        .benefit-item h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-item p {
+            font-size: 0.9375rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        /* Roadmap Section */
+        .roadmap {
+            padding: 7rem 5%;
+            background: var(--teal-mid);
+            color: var(--white);
+        }
+
+        .roadmap-header {
+            max-width: 480px;
+            margin-bottom: 5rem;
+        }
+
+        .roadmap .overline {
+            color: var(--sapling-green);
+        }
+
+        .roadmap h2 {
+            font-size: 2.5rem;
+            color: var(--white);
+        }
+
+        .roadmap-timeline {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+
+        .roadmap-item {
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-right: none;
+            position: relative;
+        }
+
+        .roadmap-item:last-child {
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--sapling-green);
+            transition: width 0.4s;
+        }
+
+        .roadmap-item:hover::before {
+            width: 100%;
+        }
+
+        .roadmap-year {
+            font-family: 'Sora', sans-serif;
+            font-size: 3.25rem;
+            font-weight: 700;
+            color: var(--sapling-green);
+            margin-bottom: 1.5rem;
+            line-height: 1;
+        }
+
+        .roadmap-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .roadmap-desc {
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 8rem 5%;
+            background: var(--cool-blue);
+        }
+
+        .cta-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .cta h2 {
+            font-size: 3.25rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-text {
+            font-size: 1.0625rem;
+            color: var(--text-gray);
+            max-width: 480px;
+            margin-bottom: 2.5rem;
+            line-height: 1.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn-primary {
+            background: var(--cyan-sky);
+            color: var(--white);
+            padding: 1.125rem 2.5rem;
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--teal-mid);
+        }
+
+        .btn-secondary {
+            color: var(--teal-mid);
+            padding: 1.125rem 0;
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--teal-mid);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            color: var(--cyan-sky);
+            border-color: var(--cyan-sky);
+        }
+
+        .cta-image {
+            height: 450px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            background: var(--soil-brown);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: var(--white);
+        }
+
+        .footer-logo span {
+            color: var(--cyan-sky);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8125rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-copy {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8125rem;
+            text-align: right;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+
+            .intro,
+            .solution-grid,
+            .waste-streams-grid,
+            .industries-layout,
+            .cta-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .problem-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .problem-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .process-flow {
+                flex-direction: column;
+                gap: 2.5rem;
+            }
+
+            .process-flow::before {
+                display: none;
+            }
+
+            .process-step {
+                max-width: 100%;
+            }
+
+            .streams-list,
+            .benefits-row,
+            .roadmap-timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .waste-streams-header {
+                position: static;
+            }
+
+            footer {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .footer-copy {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">Waste4<span>Energy</span></a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <a href="#" class="nav-cta">Get in Touch</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="../images/Hero_crisp.jpg" alt="Waste4Energy - Sustainable Growth">
+        </div>
+        <div class="hero-content">
+            <span class="overline">Clean Technology</span>
+            <h1>Redefining Industrial Waste</h1>
+            <p class="hero-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Transforming non-hazardous waste into engineered fuel for a sustainable future.</p>
+            <a href="#" class="hero-cta">Discover Our Process</a>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro">
+        <div class="intro-content">
+            <span class="overline">The Opportunity</span>
+            <h2>A $56 Billion Market Awaits</h2>
+            <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula sed auctor neque.</p>
+        </div>
+        <div class="intro-stats">
+            <div class="intro-stat">
+                <div class="stat-value">67%</div>
+                <div class="stat-label">Waste to Landfills</div>
+            </div>
+            <div class="intro-stat">
+                <div class="stat-value">$72B</div>
+                <div class="stat-label">Landfill Market</div>
+            </div>
+            <div class="intro-stat">
+                <div class="stat-value">3.2%</div>
+                <div class="stat-label">Annual Growth</div>
+            </div>
+            <div class="intro-stat">
+                <div class="stat-value">23%</div>
+                <div class="stat-label">Engineered Fuel</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="problem-grid">
+            <div class="problem-header">
+                <span class="overline">The Challenge</span>
+                <h2>Current Solutions Fall Short</h2>
+            </div>
+            <div class="problem-content">
+                <div class="problem-item">
+                    <div class="problem-number">01</div>
+                    <h4>Inconsistent Quality</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-number">02</div>
+                    <h4>Poor Service</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-number">03</div>
+                    <h4>Unfavorable Pricing</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="solution-header">
+            <span class="overline">Our Approach</span>
+            <h2>Customer-First Engineered Fuel</h2>
+            <p class="solution-intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. We build partnerships, not transactions.</p>
+        </div>
+        <div class="solution-grid">
+            <div class="solution-image">
+                <div class="image-placeholder">Solution Image</div>
+            </div>
+            <div class="solution-features">
+                <div class="feature-item">
+                    <div class="feature-number">01</div>
+                    <div>
+                        <h4>Site-Adjacent Facilities</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-number">02</div>
+                    <div>
+                        <h4>On-Site Laboratory</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-number">03</div>
+                    <div>
+                        <h4>Consistent Specifications</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-number">04</div>
+                    <div>
+                        <h4>Dedicated Partnerships</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="process-header">
+            <span class="overline">How It Works</span>
+            <h2>From Waste to Value</h2>
+        </div>
+        <div class="process-flow">
+            <div class="process-step">
+                <div class="step-circle">01</div>
+                <h4 class="step-title">Collection</h4>
+                <p class="step-desc">Lorem ipsum dolor sit amet consectetur.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-circle">02</div>
+                <h4 class="step-title">Solidifying</h4>
+                <p class="step-desc">Lorem ipsum dolor sit amet consectetur.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-circle">03</div>
+                <h4 class="step-title">Processing</h4>
+                <p class="step-desc">Lorem ipsum dolor sit amet consectetur.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-circle">04</div>
+                <h4 class="step-title">Testing</h4>
+                <p class="step-desc">Lorem ipsum dolor sit amet consectetur.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-circle">05</div>
+                <h4 class="step-title">Delivery</h4>
+                <p class="step-desc">Lorem ipsum dolor sit amet consectetur.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waste Streams Section -->
+    <section class="waste-streams">
+        <div class="waste-streams-grid">
+            <div class="waste-streams-header">
+                <span class="overline">Feedstocks</span>
+                <h2>What We Transform</h2>
+                <p class="waste-streams-intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris vivamus hendrerit.</p>
+            </div>
+            <div class="streams-list">
+                <div class="stream-item">
+                    <div class="stream-icon"></div>
+                    <h4>Oil & Gas Sludge</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+                <div class="stream-item">
+                    <div class="stream-icon"></div>
+                    <h4>Steel Mill Lubricants</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+                <div class="stream-item">
+                    <div class="stream-icon"></div>
+                    <h4>Industrial Packaging</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+                <div class="stream-item">
+                    <div class="stream-icon"></div>
+                    <h4>Automotive Residuals</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+                <div class="stream-item">
+                    <div class="stream-icon"></div>
+                    <h4>Latex Paints</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+                <div class="stream-item">
+                    <div class="stream-icon"></div>
+                    <h4>Consumer Goods</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+                <div class="stream-item">
+                    <div class="stream-icon"></div>
+                    <h4>Agricultural Products</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+                <div class="stream-item">
+                    <div class="stream-icon"></div>
+                    <h4>Passenger Tires</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="industries">
+        <div class="industries-layout">
+            <div class="industries-content">
+                <span class="overline">Industries</span>
+                <h2>Who We Serve</h2>
+                <p class="industries-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit.</p>
+                <ul class="industry-list">
+                    <li>Cement Manufacturers</li>
+                    <li>Oil & Gas Refineries</li>
+                    <li>Steel & Iron Production</li>
+                    <li>Pulp & Paper Mills</li>
+                    <li>General Manufacturing</li>
+                </ul>
+            </div>
+            <div class="industries-image">
+                <div class="image-placeholder">Industries Image</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why W4E Section -->
+    <section class="why-w4e">
+        <div class="why-w4e-header">
+            <span class="overline">Why Choose Us</span>
+            <h2>The Waste4Energy Difference</h2>
+            <p class="why-w4e-intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet nulla.</p>
+        </div>
+        <div class="benefits-row">
+            <div class="benefit-item">
+                <div class="benefit-number">01</div>
+                <h4>Consistent Quality</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-number">02</div>
+                <h4>Reliable Delivery</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-number">03</div>
+                <h4>Competitive Pricing</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-number">04</div>
+                <h4>Site-Adjacent</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-number">05</div>
+                <h4>On-Site Lab</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-number">06</div>
+                <h4>True Partnership</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="roadmap">
+        <div class="roadmap-header">
+            <span class="overline">Our Vision</span>
+            <h2>Building the Future</h2>
+        </div>
+        <div class="roadmap-timeline">
+            <div class="roadmap-item">
+                <div class="roadmap-year">2025</div>
+                <h4 class="roadmap-title">Texas Facility</h4>
+                <p class="roadmap-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Initial capacity of 20,000 NT.</p>
+            </div>
+            <div class="roadmap-item">
+                <div class="roadmap-year">2026</div>
+                <h4 class="roadmap-title">Alabama Facility</h4>
+                <p class="roadmap-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Strategic southeastern expansion.</p>
+            </div>
+            <div class="roadmap-item">
+                <div class="roadmap-year">2027</div>
+                <h4 class="roadmap-title">Arizona Facility</h4>
+                <p class="roadmap-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Western market coverage.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-layout">
+            <div>
+                <span class="overline">Get Started</span>
+                <h2>Transform Your Waste Into Value</h2>
+                <p class="cta-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet nulla et semper interdum.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn-primary">Request Consultation</a>
+                    <a href="#" class="btn-secondary">Waste Evaluation</a>
+                </div>
+            </div>
+            <div class="cta-image">
+                <div class="image-placeholder">CTA Image</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">W4<span>E</span></div>
+        <ul class="footer-links">
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+        </ul>
+        <p class="footer-copy">© 2024 Waste4Energy LLC</p>
+    </footer>
+</body>
+</html>
