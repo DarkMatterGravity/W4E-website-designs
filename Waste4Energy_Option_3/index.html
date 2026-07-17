@@ -663,11 +663,39 @@
             padding: 7rem 5%;
             background: var(--teal-mid);
             color: var(--white);
+            position: relative;
+        }
+
+        .roadmap-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .roadmap-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .roadmap-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 117, 134, 0.85);
         }
 
         .roadmap-header {
             max-width: 480px;
             margin-bottom: 5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .roadmap .overline {
@@ -683,6 +711,8 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 0;
+            position: relative;
+            z-index: 1;
         }
 
         .roadmap-item {
@@ -1185,6 +1215,9 @@
 
     <!-- Roadmap Section -->
     <section class="roadmap">
+        <div class="roadmap-bg">
+            <img src="../images/Building_The_future.png" alt="Building the Future">
+        </div>
         <div class="roadmap-header">
             <span class="overline">Our Vision</span>
             <h2>Building the Future</h2>
