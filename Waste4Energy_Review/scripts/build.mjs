@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 export const root = fileURLToPath(new URL('../', import.meta.url));
 export const fonts = ['Libre Baskerville', 'Montserrat', 'Georgia', 'Arial', 'Verdana', 'Trebuchet MS', 'Times New Roman'];
 export const icons = ['paint-bucket', 'flame', 'droplets', 'package', 'fuel', 'sprout', 'flask-conical', 'factory', 'truck', 'recycle', 'warehouse', 'arrow-right', 'menu', 'x', 'arrow-up-right'];
+export const streamImages = ['waste-paints.jpeg', 'waste-carbon-black.jpeg', 'waste-inks.jpeg', 'waste-consumer-products.jpeg', 'waste-oily-sludges.jpeg', 'waste-pesticides-herbicides.jpeg', 'waste-isocyanates.jpeg', 'waste-industrial-plant-trash.jpeg'];
 export const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 export function validate(data, baseline) {
@@ -26,7 +27,7 @@ export function validate(data, baseline) {
   shape(data, baseline);
   Object.values(data.brand.palette).forEach(v => { if (!/^#[a-f\d]{6}$/i.test(v)) throw new Error('Use six-digit hex colors.'); });
   Object.values(data.brand.fonts).forEach(v => { if (!fonts.includes(v)) throw new Error('Unsupported font.'); });
-  data.home.streams.items.forEach(v => { if (!icons.includes(v.icon)) throw new Error('Unsupported icon.'); });
+  data.home.streams.items.forEach(v => { if (!streamImages.includes(v.image)) throw new Error('Unsupported waste stream image.'); });
   data.technology.process.forEach(v => { if (!icons.includes(v.icon)) throw new Error('Unsupported icon.'); });
   const photos = ['paul-bordelon.png','jeff-gloyd.png','torry-ingram.png','grant-williams.png'];
   data.about.team.forEach(v => { if (!photos.includes(v.image)) throw new Error('Unsupported portrait.'); });
@@ -47,7 +48,7 @@ export function renderPage(data, page) {
   if (page === 'home') content = `<section class="hero"><div class="hero-main"><img class="hero-bg" src="assets/Hero_crisp.jpg" alt="" fetchpriority="high"><canvas class="hero-depth" aria-hidden="true"></canvas><div class="hero-shade"></div><div class="hero-content"><img class="hero-logo" src="assets/W4E_Logo.png" width="1268" height="438" alt="${esc(brand.name)}"><h1>${esc(h.hero.heading)}</h1><p class="hero-subtitle">${esc(h.hero.text)}</p><div class="button-row">${button(h.hero.primary,'contact.html?request=consultation')}${button(h.hero.secondary,'technology.html',true)}</div></div></div>${stats(h.stats,'hero-stats')}</section>
   <section class="section light"><div class="container split">${heading(h.challenge.label,h.challenge.heading,h.challenge.text)}<div>${heading('',h.challenge.marketHeading)}${stats(h.challenge.markets)}<p class="source-growth">${esc(h.challenge.growth)}</p></div></div></section>
   <section class="section container solution">${heading(h.solution.label,h.solution.heading,h.solution.text)}<div class="solution-image"><img src="assets/Building_The_future.png" alt="" loading="lazy"></div><div class="features">${h.solution.features.map(v=>`<article class="feature reveal"><h3>${esc(v.title)}</h3><p>${esc(v.text)}</p></article>`).join('')}</div><div class="center-link">${button(h.solution.link,'technology.html',true)}</div></section>
-  <section class="section light"><div class="container">${heading(h.streams.label,h.streams.heading)}<div class="streams-grid">${h.streams.items.map(v=>`<article class="stream-card reveal">${icon(v.icon)}<h3>${esc(v.title)}</h3></article>`).join('')}</div></div></section>${cta}`;
+  <section class="section light"><div class="container">${heading(h.streams.label,h.streams.heading)}<div class="streams-grid">${h.streams.items.map(v=>`<article class="stream-card reveal"><img class="stream-image" src="assets/${esc(v.image)}" alt="${esc(v.title)}" loading="lazy" width="220" height="220"><h3>${esc(v.title)}</h3></article>`).join('')}</div></div></section>${cta}`;
   if (page === 'technology') content = `<section class="page-intro container">${heading(t.label,t.heading,t.intro).replace('<h2>','<h1>').replace('</h2>','</h1>')}</section>
   <section class="section diagram-section"><div class="container">${heading(t.diagram.label,t.diagram.heading,t.diagram.text)}<a class="diagram-link reveal" href="assets/Process_Illustration.jpeg" target="_blank" rel="noopener" aria-label="${esc(t.diagram.open)}"><img src="assets/Process_Illustration.jpeg" width="1584" height="672" alt="${esc(t.diagram.alt)}"></a></div></section>
   <section class="section process"><div class="container">${heading(n.technology,t.processHeading)}<div class="process-grid">${t.process.map((v,i)=>`<article class="process-step reveal"><div class="step-icon">${icon(v.icon)}</div><span class="step-index">0${i+1}</span><h3>${esc(v.title)}</h3><ul>${v.items.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></article>`).join('')}</div></div></section>

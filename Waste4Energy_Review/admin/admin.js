@@ -1,4 +1,4 @@
-let data, csrf, fonts, icons, dirty=false, active='home';
+let data, csrf, fonts, icons, streamImages, dirty=false, active='home';
 const editor=document.querySelector('#editor');
 const status=document.querySelector('#status');
 const tabs=document.querySelector('#tabs');
@@ -9,7 +9,7 @@ function fields(value,path,parent){
   if(typeof value==='string'){
     const wrap=document.createElement('label');wrap.className='field';wrap.textContent=label(path.at(-1));
     let input;
-    const options=path.includes('fonts')?fonts:path.at(-1)==='icon'?icons:path.at(-1)==='image'?['paul-bordelon.png','jeff-gloyd.png','torry-ingram.png','grant-williams.png']:null;
+    const options=path.includes('fonts')?fonts:path.at(-1)==='icon'?icons:path.at(-1)==='image'?(path.includes('streams')?streamImages:['paul-bordelon.png','jeff-gloyd.png','torry-ingram.png','grant-williams.png']):null;
     if(options){input=document.createElement('select');for(const v of options){const o=document.createElement('option');o.value=v;o.textContent=v;input.append(o);}}
     else input=document.createElement(value.length>100 || ['text','intro','message','alt','mapAlt'].includes(path.at(-1))?'textarea':'input');
     input.setAttribute('aria-label',label(path.at(-1)));input.value=value;input.addEventListener('input',()=>set(path,input.value));
@@ -44,4 +44,4 @@ document.querySelector('#import').addEventListener('click',()=>document.querySel
 document.querySelector('#file').addEventListener('change',async e=>{try{const next=JSON.parse(await e.target.files[0].text());if(!next.brand||!next.home||!next.technology||!next.about||!next.contact||!next.navigation)throw new Error('Choose a W4E content backup.');data=next;dirty=true;render();status.textContent='Imported. Save to validate and apply.';}catch(e){status.textContent='Could not import: '+e.message;}});
 document.querySelector('#export').addEventListener('click',e=>{if(dirty){e.preventDefault();status.textContent='Save your changes before exporting.';}});
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
-fetch('/api/content').then(r=>{if(!r.ok)throw new Error('Server unavailable.');return r.json();}).then(result=>{({data,csrf,fonts,icons}=result);render();status.textContent='Ready';}).catch(e=>status.textContent='Could not load: '+e.message);
+fetch('/api/content').then(r=>{if(!r.ok)throw new Error('Server unavailable.');return r.json();}).then(result=>{({data,csrf,fonts,icons,streamImages}=result);render();status.textContent='Ready';}).catch(e=>status.textContent='Could not load: '+e.message);

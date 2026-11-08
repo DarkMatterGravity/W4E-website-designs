@@ -34,3 +34,6 @@
 
 .roadmap-bg{transform-origin:50% 50%;animation:vision-ken-burns 6s cubic-bezier(.45,0,.55,1) infinite alternate}
 @keyframes vision-ken-burns{from{transform:scale(1.16) translate3d(-4%,2.5%,0)}to{transform:scale(1.21) translate3d(4%,-2.5%,0)}}
+
+.stream-card{text-align:center}
+.stream-image{width:100%;max-width:220px;aspect-ratio:1;object-fit:cover;border:5px solid var(--white);border-radius:50%;margin:0 auto 1.25rem}

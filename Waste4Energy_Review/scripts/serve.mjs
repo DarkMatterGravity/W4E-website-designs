@@ -2,7 +2,7 @@ import http from 'node:http';
 import path from 'node:path';
 import { readFile, writeFile } from 'node:fs/promises';
 import { randomBytes } from 'node:crypto';
-import { root, build, validate, fonts, icons } from './build.mjs';
+import { root, build, validate, fonts, icons, streamImages } from './build.mjs';
 import { createArchive } from './export.mjs';
 
 const dist = await build();
@@ -24,7 +24,7 @@ const server = http.createServer(async (req,res) => {
     if (req.headers.host !== `${host}:${port}` && req.headers.host !== `localhost:${port}`) return json(403,{error:'Local access only.'});
     if (req.headers.origin && ![`http://${host}:${port}`,`http://localhost:${port}`].includes(req.headers.origin)) return json(403,{error:'Local access only.'});
     const url = new URL(req.url,`http://${host}:${port}`);
-    if (url.pathname === '/api/content' && req.method === 'GET') return json(200,{data:JSON.parse(await readFile(path.join(root,'content/site.json'),'utf8')),csrf,fonts,icons});
+    if (url.pathname === '/api/content' && req.method === 'GET') return json(200,{data:JSON.parse(await readFile(path.join(root,'content/site.json'),'utf8')),csrf,fonts,icons,streamImages});
     if (url.pathname === '/api/content' && req.method === 'PUT') {
       if (req.headers['x-csrf-token'] !== csrf) return json(403,{error:'Reload the editor.'});
       if (saving) return json(409,{error:'A save is in progress.'});
