@@ -14,7 +14,7 @@ if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: re
     header.classList.remove('reveal');
     [...header.children].forEach(node => node.classList.add('reveal'));
   });
-  document.querySelectorAll('.solution-image, .center-link, .button-row, .plans > article, .equipment-details, .contact-form').forEach(node => node.classList.add('reveal'));
+  document.querySelectorAll('.solution-image, .plan-image, .source-growth, .center-link, .button-row, .plans > article, .equipment-details, .contact-form').forEach(node => node.classList.add('reveal'));
   const targets = [...document.querySelectorAll('.reveal')].filter(node => {
     // A parent already animates its contents; avoid compounding the movement.
     if (node.parentElement.closest('.reveal')) { node.classList.add('visible'); return false; }
