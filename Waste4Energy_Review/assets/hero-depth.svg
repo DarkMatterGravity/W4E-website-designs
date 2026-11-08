@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2048" height="1143" viewBox="0 0 2048 1143">
+  <defs>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#181818"/>
+      <stop offset=".62" stop-color="#181818"/>
+      <stop offset=".8" stop-color="#888888"/>
+      <stop offset="1" stop-color="#eeeeee"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="1" x2="0" y2="0">
+      <stop stop-color="#d8d8d8"/>
+      <stop offset="1" stop-color="#fafafa"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+  <!-- Dark values sit far back; the sprout and foreground soil sit closer. -->
+  <rect width="2048" height="1143" fill="url(#ground)"/>
+  <g filter="url(#soft)">
+    <path fill="url(#leaf)" d="M1736 659 C1745 588 1750 531 1794 477 C1847 420 1917 425 1959 461 C1976 483 1920 553 1857 603 C1810 641 1771 656 1736 659Z"/>
+    <path fill="url(#leaf)" d="M1718 685 C1648 699 1536 682 1460 613 C1435 590 1454 565 1487 555 C1568 530 1665 565 1701 622 C1719 647 1725 672 1718 685Z"/>
+    <path d="M1754 912 C1747 829 1741 752 1726 681 L1709 644" fill="none" stroke="#dddddd" stroke-width="20" stroke-linecap="round"/>
+    <path d="M1728 686 Q1733 669 1745 650" fill="none" stroke="#dddddd" stroke-width="14" stroke-linecap="round"/>
+  </g>
+</svg>

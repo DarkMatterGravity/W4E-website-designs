@@ -44,6 +44,32 @@ test('Get Started rolls over to a white fill with a black border and text',async
   await expect(cta).toHaveCSS('color','rgb(0, 0, 0)');
   await page.mouse.move(0,200);await cta.focus();await expect(cta).toHaveCSS('background-color','rgb(255, 255, 255)');
 });
+test('hero depth responds in both directions, keeps text steady and disables for reduced motion',async({page})=>{
+  await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/');
+  const hero=page.locator('.hero-main'),canvas=hero.locator('canvas');
+  await expect(hero).toHaveClass(/hero-depth-ready/);await expect(page.locator('.hero-content')).toHaveCSS('opacity','1');
+  const textPosition=await page.locator('.hero-content').boundingBox(),bounds=await hero.boundingBox();
+  const before=await canvas.screenshot();
+  await page.mouse.move(bounds.x+bounds.width*.85,bounds.y+bounds.height*.25);
+  await expect.poll(async()=>!(await canvas.screenshot()).equals(before)).toBe(true);
+  const right=await canvas.screenshot();
+  await page.mouse.move(bounds.x+bounds.width*.15,bounds.y+bounds.height*.8);
+  await expect.poll(async()=>!(await canvas.screenshot()).equals(right)).toBe(true);
+  expect(await page.locator('.hero-content').boundingBox()).toEqual(textPosition);
+  expect(await canvas.evaluate(e=>e.getContext('webgl').getError())).toBe(0);
+  await page.emulateMedia({reducedMotion:'reduce'});await expect(hero).not.toHaveClass(/hero-depth-ready/);await expect(hero.locator('.hero-bg')).toHaveCSS('visibility','visible');
+});
+test('home figures tally on entry, preserve suffixes and do not restart on a second scroll',async({page})=>{
+  await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/');
+  const market=page.locator('.source-growth').locator('..').locator('.stat-number');
+  await expect(market.first().locator('[aria-hidden]')).toHaveText('0%');
+  await market.first().scrollIntoViewIfNeeded();
+  await expect(market.first().locator('[aria-hidden]')).toHaveText('67%');
+  await expect(market.nth(1).locator('[aria-hidden]')).toHaveText('23%');await expect(market.nth(2).locator('[aria-hidden]')).toHaveText('9%');
+  const first=page.locator('.hero-stats .stat-number').first();await first.scrollIntoViewIfNeeded();await expect(first.locator('[aria-hidden]')).toHaveText('254M');
+  await market.first().scrollIntoViewIfNeeded();await expect(market.first().locator('[aria-hidden]')).toHaveText('67%');
+  await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await expect(page.locator('.hero-stats .stat-number').first()).toHaveText('254M');await expect(page.locator('.stat-number [aria-hidden]')).toHaveCount(0);
+});
 test('executive portraits clip to circles, keep their hover zoom and loop an eased ring rotation',async({page})=>{
   await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/about.html');
   const portrait=page.locator('.portrait').first(),zoom=portrait.locator('.portrait-zoom'),ring=portrait.locator('.portrait-ring');

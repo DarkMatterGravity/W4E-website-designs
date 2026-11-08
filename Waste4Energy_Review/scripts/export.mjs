@@ -16,7 +16,7 @@ async function assetFiles(folder,prefix='assets/') {
 export async function createArchive() {
   const dist=path.join(root,'dist');
   const files=await assetFiles(path.join(dist,'assets'));
-  for(const name of ['index.html','technology.html','about.html','contact.html','theme.css','styles.css','site.js','contact.php','server-config.example.php','.htaccess','robots.txt'])files[name]=new Uint8Array(await readFile(path.join(dist,name)));
+  for(const name of ['index.html','technology.html','about.html','contact.html','theme.css','styles.css','site.js','hero-depth.js','contact.php','server-config.example.php','.htaccess','robots.txt'])files[name]=new Uint8Array(await readFile(path.join(dist,name)));
   files['DEPLOYMENT.md']=new Uint8Array(await readFile(path.join(root,'DEPLOYMENT.md')));
   return zipSync(files);
 }
