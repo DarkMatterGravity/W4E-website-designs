@@ -108,35 +108,35 @@
       "items": [
         {
           "title": "Paints",
-          "image": "waste-paints.jpeg"
+          "image": "generated-paints.webp"
         },
         {
           "title": "Carbon black",
-          "image": "waste-carbon-black.jpeg"
+          "image": "generated-carbon-black.webp"
         },
         {
           "title": "Inks",
-          "image": "waste-inks.jpeg"
+          "image": "generated-inks.webp"
         },
         {
           "title": "Consumer products",
-          "image": "waste-consumer-products.jpeg"
+          "image": "generated-consumer-products.webp"
         },
         {
           "title": "Oily sludges",
-          "image": "waste-oily-sludges.jpeg"
+          "image": "generated-oily-sludges.webp"
         },
         {
           "title": "Pesticides and herbicides",
-          "image": "waste-pesticides-herbicides.jpeg"
+          "image": "generated-pesticides-herbicides.webp"
         },
         {
           "title": "Isocyanates",
-          "image": "waste-isocyanates.jpeg"
+          "image": "generated-isocyanates.webp"
         },
         {
           "title": "Industrial plant trash",
-          "image": "waste-industrial-plant-trash.jpeg"
+          "image": "generated-industrial-plant-trash.webp"
         }
       ]
     }

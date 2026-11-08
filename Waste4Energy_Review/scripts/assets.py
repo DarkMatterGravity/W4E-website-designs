@@ -7,9 +7,6 @@ source = Path(sys.argv[1])
 out = Path(__file__).resolve().parents[1] / 'assets'
 doc = fitz.open(source)
 (out / 'vision-processing.jpeg').write_bytes(doc.extract_image(24)['image'])
-# Original, unmodified photos from physical slide 5, matched to their labels.
-for name, xref in [('paints', 106), ('carbon-black', 107), ('inks', 108), ('consumer-products', 109), ('oily-sludges', 110), ('pesticides-herbicides', 111), ('isocyanates', 112), ('industrial-plant-trash', 113)]:
-    (out / f'waste-{name}.jpeg').write_bytes(doc.extract_image(xref)['image'])
 names = ['paul-bordelon', 'jeff-gloyd', 'torry-ingram', 'grant-williams']
 # Render the original composited portraits: isolated embedded photographs have
 # PDF soft masks that do not reproduce correctly as standalone image files.

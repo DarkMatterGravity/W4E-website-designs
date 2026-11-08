@@ -6,7 +6,7 @@ import { createHash } from 'node:crypto';
 export const root = fileURLToPath(new URL('../', import.meta.url));
 export const fonts = ['Libre Baskerville', 'Montserrat', 'Georgia', 'Arial', 'Verdana', 'Trebuchet MS', 'Times New Roman'];
 export const icons = ['paint-bucket', 'flame', 'droplets', 'package', 'fuel', 'sprout', 'flask-conical', 'factory', 'truck', 'recycle', 'warehouse', 'trash', 'arrow-right', 'menu', 'x', 'arrow-up-right'];
-export const streamImages = ['waste-paints.jpeg', 'waste-carbon-black.jpeg', 'waste-inks.jpeg', 'waste-consumer-products.jpeg', 'waste-oily-sludges.jpeg', 'waste-pesticides-herbicides.jpeg', 'waste-isocyanates.jpeg', 'waste-industrial-plant-trash.jpeg'];
+export const streamImages = ['generated-paints.webp', 'generated-carbon-black.webp', 'generated-inks.webp', 'generated-consumer-products.webp', 'generated-oily-sludges.webp', 'generated-pesticides-herbicides.webp', 'generated-isocyanates.webp', 'generated-industrial-plant-trash.webp'];
 export const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 export function validate(data, baseline) {
@@ -50,7 +50,7 @@ function marketChart(markets, title) {
     const x = (180 + Math.cos(angle) * 125).toFixed(2), y = (180 + Math.sin(angle) * 125).toFixed(2);
     const result = {
       segment: `<circle class="market-sector market-sector-${index}" cx="180" cy="180" r="125" pathLength="100" stroke-dasharray="${share} 100" stroke-dashoffset="${-offset}" transform="rotate(-90 180 180)"><title>${esc(item.number)} ${esc(item.label)}</title></circle>`,
-      label: `<text class="market-percent market-percent-${index}" x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central">${esc(item.number)}</text>`
+      label: `<text class="market-percent market-percent-${index}" data-market-index="${index}" data-sweep-start="${offset}" data-sweep-size="${share}" data-total="${esc(item.number)}" x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" aria-hidden="true">${esc(item.number)}</text>`
     };
     offset += share;
     return result;
@@ -58,7 +58,7 @@ function marketChart(markets, title) {
   // Draw all ring segments before their labels so no segment can cover a label.
   const circles = segments.map(v => v.segment).join('');
   const labels = segments.map(v => v.label).join('');
-  return `<div class="market-chart reveal"><svg viewBox="0 0 360 360" width="400" height="400" role="img" aria-labelledby="market-chart-title market-chart-description"><title id="market-chart-title">${esc(title)}</title><desc id="market-chart-description">${markets.map(v => `${esc(v.label)}: ${esc(v.number)}`).join('; ')}.</desc>${circles}${labels}</svg></div>`;
+  return `<div class="market-chart reveal"><svg viewBox="0 0 360 360" width="400" height="400" role="img" aria-labelledby="market-chart-title market-chart-description"><title id="market-chart-title">${esc(title)}</title><desc id="market-chart-description">${markets.map(v => `${esc(v.label)}: ${esc(v.number)}`).join('; ')}.</desc><defs><mask id="market-chart-wipe" maskUnits="userSpaceOnUse" x="0" y="0" width="360" height="360"><circle class="market-wipe" cx="180" cy="180" r="125" fill="none" stroke="white" stroke-width="80" pathLength="100" stroke-dasharray="100 100" stroke-dashoffset="0" transform="rotate(-90 180 180)"/></mask></defs><g mask="url(#market-chart-wipe)">${circles}</g>${labels}</svg></div>`;
 }
 
 export function renderPage(data, page) {

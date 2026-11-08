@@ -70,6 +70,17 @@ test('home figures tally on entry, preserve suffixes and do not restart on a sec
   await market.first().scrollIntoViewIfNeeded();await expect(market.first().locator('[aria-hidden]')).toHaveText('67%');
   await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await expect(page.locator('.hero-stats .stat-number').first()).toHaveText('254M');await expect(page.locator('.stat-number [aria-hidden]')).toHaveCount(0);
 });
+test('donut wipes clockwise once and tallies its percentages with the sector growth',async({page})=>{
+  await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/');
+  const chart=page.locator('.market-chart'),wipe=chart.locator('.market-wipe');
+  await expect(wipe).toHaveAttribute('stroke-dashoffset','100');
+  await chart.scrollIntoViewIfNeeded();await expect(chart).toHaveAttribute('data-chart-state','animating');
+  await expect.poll(async()=>Number(await wipe.getAttribute('stroke-dashoffset'))).toBeLessThan(100);
+  await expect(chart).toHaveAttribute('data-chart-state','complete');await expect(wipe).toHaveAttribute('stroke-dashoffset','0');
+  await expect(chart.locator('.market-percent-0')).toHaveText('67%');await expect(chart.locator('.market-percent-1')).toHaveText('23%');await expect(chart.locator('.market-percent-2')).toHaveText('9%');
+  await page.locator('.hero').scrollIntoViewIfNeeded();await chart.scrollIntoViewIfNeeded();await expect(chart).toHaveAttribute('data-chart-state','complete');
+  await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await expect(page.locator('.market-wipe')).toHaveAttribute('stroke-dashoffset','0');
+});
 test('executive portraits clip to circles, keep their hover zoom and loop an eased ring rotation',async({page})=>{
   await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/about.html');
   const portrait=page.locator('.portrait').first(),zoom=portrait.locator('.portrait-zoom'),ring=portrait.locator('.portrait-ring');

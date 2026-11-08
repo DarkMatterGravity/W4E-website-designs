@@ -10,7 +10,7 @@ const baseline = JSON.parse(await readFile(path.join(root,'content/site.json'),'
 const csrf = randomBytes(32).toString('hex');
 const port = Number(process.env.PORT || 4173);
 const host = '127.0.0.1';
-const mime = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.svg':'image/svg+xml','.woff2':'font/woff2','.json':'application/json; charset=utf-8'};
+const mime = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.svg':'image/svg+xml','.woff2':'font/woff2','.json':'application/json; charset=utf-8'};
 let saving = false;
 
 async function body(req) {
