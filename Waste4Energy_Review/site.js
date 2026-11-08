@@ -65,12 +65,61 @@ if (document.querySelector('.hero') && 'IntersectionObserver' in window && !coun
     });
   }, { threshold: .35, rootMargin: '0px 0px -24px 0px' });
   document.querySelectorAll('.stat-number').forEach(node => {
+    if (node.closest('.market-legend')) return;
     const original = node.textContent.trim();
     if (!/^([+-]?)(\d[\d,]*(?:\.\d+)?)(.*)$/.test(original)) return;
     node.dataset.total = original;
     const spoken = document.createElement('span'); spoken.className = 'sr-only'; spoken.textContent = original;
     const visual = document.createElement('span'); visual.setAttribute('aria-hidden', 'true'); visual.textContent = original.replace(/[\d,.]+/, '0');
     node.replaceChildren(spoken, visual); counters.observe(node);
+  });
+}
+// A single clockwise sweep drives each sector and its two percentage labels.
+// Static and reduced-motion views retain the complete, source-backed chart.
+if ('IntersectionObserver' in window && !counterReduced.matches) {
+  document.querySelectorAll('.market-chart').forEach(chart => {
+    const wipe = chart.querySelector('.market-wipe');
+    if (!wipe) return;
+    const legend = chart.closest('.market-panel').querySelectorAll('.market-legend .stat-number');
+    const records = [...chart.querySelectorAll('.market-percent')].map(label => {
+      const original = label.dataset.total;
+      const number = legend[Number(label.dataset.marketIndex)];
+      number.dataset.total = original;
+      const spoken = document.createElement('span'); spoken.className = 'sr-only'; spoken.textContent = original;
+      const visual = document.createElement('span'); visual.setAttribute('aria-hidden', 'true');
+      number.replaceChildren(spoken, visual);
+      const decimals = (original.replace('%', '').split('.')[1] || '').length;
+      return {label, visual, original, value:parseFloat(original), start:Number(label.dataset.sweepStart), size:Number(label.dataset.sweepSize), format:new Intl.NumberFormat('en-US',{minimumFractionDigits:decimals,maximumFractionDigits:decimals})};
+    });
+    let frame = 0;
+    function update(sweep) {
+      wipe.setAttribute('stroke-dashoffset', String(100 - sweep));
+      records.forEach(record => {
+        const progress = record.size ? Math.max(0, Math.min(1, (sweep - record.start) / record.size)) : 1;
+        const text = progress === 1 ? record.original : record.format.format(record.value * progress) + '%';
+        record.label.textContent = text; record.visual.textContent = text;
+        // Reveal the in-ring number only once the wipe reaches its position.
+        record.label.setAttribute('opacity', String(Math.max(0, Math.min(1, (progress - .45) / .15))));
+      });
+    }
+    function finish() {
+      cancelAnimationFrame(frame); frame = 0; update(100);
+      chart.dataset.chartState = 'complete'; observer.unobserve(chart);
+    }
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      observer.unobserve(chart); chart.dataset.chartState = 'animating';
+      const start = performance.now() + Number(chart.dataset.revealStep || 0) * 65;
+      function animate(time) {
+        if (counterReduced.matches) { finish(); return; }
+        const progress = Math.max(0, Math.min(1, (time - start) / 1800));
+        update((1 - Math.pow(1 - progress, 3)) * 100);
+        if (progress < 1) frame = requestAnimationFrame(animate); else finish();
+      }
+      frame = requestAnimationFrame(animate);
+    }, {threshold:.25,rootMargin:'0px 0px -24px 0px'});
+    update(0); chart.dataset.chartState = 'waiting'; observer.observe(chart);
+    counterReduced.addEventListener('change', () => { if (counterReduced.matches) finish(); });
   });
 }
 const form = document.querySelector('#contact-form');
