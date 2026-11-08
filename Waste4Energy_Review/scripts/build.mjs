@@ -1,6 +1,7 @@
 import { readFile, writeFile, mkdir, cp } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 
 export const root = fileURLToPath(new URL('../', import.meta.url));
 export const fonts = ['Libre Baskerville', 'Montserrat', 'Georgia', 'Arial', 'Verdana', 'Trebuchet MS', 'Times New Roman'];
@@ -69,6 +70,14 @@ export async function build() {
   const theme = `:root{${palette}--heading-font:"${data.brand.fonts.heading}",Georgia,serif;--body-font:"${data.brand.fonts.body}",Arial,sans-serif;}`;
   await writeFile(path.join(dist,'theme.css'),theme);
   for (const file of ['styles.css','site.js','contact.php','server-config.example.php','.htaccess']) await cp(path.join(root,file),path.join(dist,file));
+  // Version changed assets so returning reviewers receive the latest styling and motion.
+  const versions = await Promise.all(['styles.css','site.js','theme.css','assets/fonts.css'].map(async name => [name,createHash('sha256').update(await readFile(path.join(dist,name))).digest('hex').slice(0,10)]));
+  for (const name of ['index.html','technology.html','about.html','contact.html']) {
+    const file = path.join(dist,name);
+    let html = await readFile(file,'utf8');
+    for (const [asset,version] of versions) html = html.replaceAll(`="${asset}"`,`="${asset}?v=${version}"`);
+    await writeFile(file,html);
+  }
   await writeFile(path.join(dist,'robots.txt'),'User-agent: *\nDisallow: /\n');
   // Reviews stay out of search results; deployment instructions explain removing robots.txt.
   return dist;
