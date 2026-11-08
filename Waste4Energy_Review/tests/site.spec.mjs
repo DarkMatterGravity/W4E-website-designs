@@ -41,6 +41,23 @@ test('Get Started rolls over to a white fill with a black border and text',async
   await expect(cta).toHaveCSS('color','rgb(0, 0, 0)');
   await page.mouse.move(0,200);await cta.focus();await expect(cta).toHaveCSS('background-color','rgb(255, 255, 255)');
 });
+test('executive portraits clip to circles, keep their hover zoom and loop an eased ring rotation',async({page})=>{
+  await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/about.html');
+  const portrait=page.locator('.portrait').first(),zoom=portrait.locator('.portrait-zoom'),ring=portrait.locator('.portrait-ring');
+  await portrait.scrollIntoViewIfNeeded();await expect(portrait).toHaveCSS('border-radius','50%');await expect(portrait.locator('.portrait-photo')).toHaveCSS('overflow','hidden');
+  await portrait.hover();await expect(zoom).toHaveCSS('transform','matrix(1.07, 0, 0, 1.07, 0, 0)');
+  const motion=await ring.evaluate(node=>{
+    const animation=node.getAnimations()[0];animation.pause();
+    const timing=animation.effect.getTiming();animation.currentTime=600;const turning=getComputedStyle(node).transform;
+    animation.currentTime=1800;const stopped=getComputedStyle(node).transform;
+    animation.currentTime=2300;const holding=getComputedStyle(node).transform;
+    return{loop:timing.iterations===Infinity,turning,stopped,holding};
+  });
+  expect(motion.loop).toBe(true);expect(motion.turning).not.toBe(motion.stopped);expect(motion.holding).toBe(motion.stopped);
+  await expect(zoom).toHaveCSS('transform','matrix(1.07, 0, 0, 1.07, 0, 0)');
+  await page.mouse.move(0,0);await expect(zoom).toHaveCSS('transform','matrix(1, 0, 0, 1, 0, 0)');await expect(ring).toHaveCSS('animation-name','none');
+  await page.emulateMedia({reducedMotion:'reduce'});await portrait.hover();await expect(ring).toHaveCSS('animation-name','none');await expect(zoom).toHaveCSS('transform','none');
+});
 test('contact form selects request, validates and never claims an undelivered message was sent',async({page})=>{
   await page.goto('/contact.html?request=evaluation');await expect(page.locator('select[name=request]')).toHaveValue('evaluation');
   await page.getByRole('button',{name:'Contact Us'}).click();await expect(page.locator('input[name=name]:invalid')).toHaveCount(1);
