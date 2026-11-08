@@ -34,3 +34,4 @@ jobs:
         with:
           name: Waste4Energy-review-screenshots
           path: .local/*.png
+          include-hidden-files: true
