@@ -33,6 +33,9 @@ test('normal motion reveals content as the visitor scrolls',async({page})=>{
   await expect(cards.first()).toHaveCSS('transition-timing-function', /cubic-bezier\(0\.16, 1, 0\.3, 1\)/);
   expect(await cards.evaluateAll(nodes=>new Set(nodes.slice(0,4).map(n=>n.dataset.revealStep)).size)).toBeGreaterThan(1);
   await page.locator('.solution-image').scrollIntoViewIfNeeded();await expect(page.locator('.solution-image')).toHaveCSS('opacity','1');
+  await page.goto('/about.html');
+  const map=page.locator('.plan-image');await expect(map).toHaveClass(/reveal/);await expect(map).toHaveCSS('opacity','0');
+  await map.scrollIntoViewIfNeeded();await expect(map).toHaveClass(/visible/);await expect(map).toHaveCSS('opacity','1');
 });
 test('Get Started rolls over to a white fill with a black border and text',async({page})=>{
   await page.goto('/');const cta=page.locator('.nav-cta');await cta.hover();
