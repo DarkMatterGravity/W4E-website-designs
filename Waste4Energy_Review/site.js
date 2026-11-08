@@ -9,10 +9,34 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(
 document.addEventListener('click', e => { if (!e.target.closest('.navigation')) closeMenu(); });
 links?.addEventListener('click', e => { if (e.target.closest('a')) closeMenu(); });
 if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-    if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-  }), { threshold: .08 });
-  document.querySelectorAll('.reveal').forEach(node => observer.observe(node));
+  // Reveal headings in reading order, then images, cards and actions as they enter.
+  document.querySelectorAll('.section-head').forEach(header => {
+    header.classList.remove('reveal');
+    [...header.children].forEach(node => node.classList.add('reveal'));
+  });
+  document.querySelectorAll('.solution-image, .center-link, .button-row, .plans > article, .equipment-details, .contact-form').forEach(node => node.classList.add('reveal'));
+  const targets = [...document.querySelectorAll('.reveal')].filter(node => {
+    // A parent already animates its contents; avoid compounding the movement.
+    if (node.parentElement.closest('.reveal')) { node.classList.add('visible'); return false; }
+    return true;
+  });
+  const observer = new IntersectionObserver(entries => {
+    const sections = new Map();
+    entries.filter(entry => entry.isIntersecting).forEach(entry => {
+      const section = entry.target.closest('section') || entry.target.parentElement;
+      if (!sections.has(section)) sections.set(section, []);
+      sections.get(section).push(entry);
+    });
+    sections.forEach(batch => {
+      batch.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left);
+      batch.forEach((entry, index) => {
+        entry.target.dataset.revealStep = String(Math.min(index, 4));
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    });
+  }, { threshold: .08, rootMargin: '0px 0px -32px 0px' });
+  targets.forEach(node => observer.observe(node));
   document.documentElement.classList.add('motion');
 }
 const form = document.querySelector('#contact-form');
