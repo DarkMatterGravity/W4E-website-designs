@@ -1,0 +1,36 @@
+name: Waste4Energy review build
+on:
+  pull_request:
+    paths: ['Waste4Energy_Review/**', '.github/workflows/review.yml']
+  push:
+    paths: ['Waste4Energy_Review/**', '.github/workflows/review.yml']
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Waste4Energy_Review
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: Waste4Energy_Review/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: php -l contact.php
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - run: npm run export
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Waste4Energy-review-website
+          path: Waste4Energy_Review/exports/Waste4Energy-GoDaddy.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Waste4Energy-review-screenshots
+          path: .local/*.png

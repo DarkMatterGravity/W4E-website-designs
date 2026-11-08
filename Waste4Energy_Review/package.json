@@ -1,0 +1,19 @@
+{
+  "name": "waste4energy-review",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "export": "node scripts/export.mjs",
+    "dev": "node scripts/serve.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0"
+  },
+  "dependencies": {
+    "fflate": "0.8.3"
+  }
+}
