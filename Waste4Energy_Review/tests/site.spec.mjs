@@ -61,7 +61,7 @@ test('hero depth responds in both directions, keeps text steady and disables for
 });
 test('home figures tally on entry, preserve suffixes and do not restart on a second scroll',async({page})=>{
   await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/');
-  const market=page.locator('.source-growth').locator('..').locator('.stat-number');
+  const market=page.locator('.market-legend .stat-number');
   await expect(market.first().locator('[aria-hidden]')).toHaveText('0%');
   await market.first().scrollIntoViewIfNeeded();
   await expect(market.first().locator('[aria-hidden]')).toHaveText('67%');

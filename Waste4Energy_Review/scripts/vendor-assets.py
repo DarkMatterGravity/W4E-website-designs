@@ -6,7 +6,7 @@ import json
 
 root = Path(__file__).resolve().parents[1]
 out = root / 'assets'
-names = ['paint-bucket','flame','droplets','package','fuel','sprout','flask-conical','factory','truck','recycle','warehouse','arrow-right','menu','x','arrow-up-right']
+names = ['paint-bucket','flame','droplets','package','fuel','sprout','flask-conical','factory','truck','recycle','warehouse','trash','arrow-right','menu','x','arrow-up-right']
 def get(url):
     return urlopen(Request(url, headers={'User-Agent':'Mozilla/5.0'}), timeout=30).read()
 

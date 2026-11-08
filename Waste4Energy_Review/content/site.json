@@ -53,9 +53,7 @@
     "challenge": {
       "label": "The Challenge",
       "heading": "The Non Hazardous Waste Industry At A Glance",
-      "text": "With the US producing over 254 million tons of solid waste annually and about 140 million tons going to landfills, the need for alternative waste management solutions is urgent.",
       "marketHeading": "US Market Share",
-      "growth": "Alternative Engineered Fuel volumes to rise from 297,000 to 502,000 tons (6.07%) by 2032.",
       "markets": [
         {
           "number": "67%",
@@ -69,12 +67,25 @@
           "number": "9%",
           "label": "Alternative Fuels"
         }
+      ],
+      "points": [
+        {
+          "text": "With the US producing over 254 million tons of solid waste annually and about 140 million tons going to landfills, the need for alternative waste management solutions is urgent.",
+          "icon": "trash"
+        },
+        {
+          "text": "Alternative Engineered Fuel volumes to rise from 297,000 to 502,000 tons (6.07%) by 2032.",
+          "icon": "flask-conical"
+        },
+        {
+          "text": "Rapidly emerging as a sustainable solution to diverting waste from landfills.",
+          "icon": "sprout"
+        }
       ]
     },
     "solution": {
       "label": "Our Solution",
       "heading": "From Waste to Engineered Fuel",
-      "text": "Rapidly emerging as a sustainable solution to diverting waste from landfills.",
       "features": [
         {
           "title": "Innovative recycling",
