@@ -14,7 +14,7 @@ Source: `Waste4Energy Presentation.pdf` (11 physical pages), supplied locally. T
 | 8: Phase 1 receiving | Technology receiving / Phase 1 | Equipment list and full source schematic retained, including nested shredder and baghouse component labels on the schematic. |
 | 9: Phase 2 | Technology blending / lab / storage; Phase 2 and Unknown Equipment | Phase 2 remains labeled as an addition. Unknown equipment remains explicitly labeled, not represented as installed capability. Full original source schematic retained. |
 | 10: equipment image | Technology Unknown Equipment expandable panel | Source illustration retained with its labels. |
-| 11: Areas of Focus | About locations map | Original map retained. Western US is not renamed Arizona; map visually highlights Nevada. Source map's 500K and 100K labels remain on the map, not promoted as verified operating capacity. |
+| 11: Areas of Focus | About locations map | Original geography and labels retained. At the client's request, the four colored symbols are replaced with the dark recycling/lightning symbol, the legacy corner wordmark and embedded title are removed, and empty slide margins are trimmed. Western US is not renamed Arizona; map visually highlights Nevada. Source map's 500K and 100K labels remain on the map, not promoted as verified operating capacity. |
 | Supplied W4E_Logo.png | Header, hero, footer | Exact supplied logo, unchanged. |
 | Option 1 | Typography, colors, layout, navigation, CTA labels | Original brand palette and serif/sans pairing retained. |
 | Option 2 | Home hero | Full-width Hero_crisp.jpg, teal overlay, logo, headline, buttons and four-stat strip. Unsupported template stats ($56B, 90K, etc.) replaced with source-backed figures. |
