@@ -39,6 +39,40 @@ if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: re
   targets.forEach(node => observer.observe(node));
   document.documentElement.classList.add('motion');
 }
+// Keep the final numbers available to assistive technology while the visual
+// figures tally once, only when they actually enter the viewport.
+const counterReduced = matchMedia('(prefers-reduced-motion: reduce)');
+if (document.querySelector('.hero') && 'IntersectionObserver' in window && !counterReduced.matches) {
+  const counters = new IntersectionObserver(entries => {
+    entries.filter(entry => entry.isIntersecting).forEach(entry => {
+      const node = entry.target, original = node.dataset.total;
+      const match = original.match(/^([+-]?)(\d[\d,]*(?:\.\d+)?)(.*)$/);
+      counters.unobserve(node);
+      if (!match) return;
+      const value = Number(match[2].replaceAll(',', ''));
+      const decimals = (match[2].split('.')[1] || '').length;
+      const format = new Intl.NumberFormat('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+      const visual = node.querySelector('[aria-hidden]');
+      const start = performance.now() + Number(node.closest('.stat-item')?.dataset.revealStep || 0) * 65;
+      function tally(time) {
+        if (counterReduced.matches) { visual.textContent = original; return; }
+        const progress = Math.max(0, Math.min(1, (time - start) / 1150));
+        const eased = 1 - Math.pow(1 - progress, 3);
+        visual.textContent = progress === 1 ? original : match[1] + format.format(value * eased) + match[3];
+        if (progress < 1) requestAnimationFrame(tally);
+      }
+      requestAnimationFrame(tally);
+    });
+  }, { threshold: .35, rootMargin: '0px 0px -24px 0px' });
+  document.querySelectorAll('.stat-number').forEach(node => {
+    const original = node.textContent.trim();
+    if (!/^([+-]?)(\d[\d,]*(?:\.\d+)?)(.*)$/.test(original)) return;
+    node.dataset.total = original;
+    const spoken = document.createElement('span'); spoken.className = 'sr-only'; spoken.textContent = original;
+    const visual = document.createElement('span'); visual.setAttribute('aria-hidden', 'true'); visual.textContent = original.replace(/[\d,.]+/, '0');
+    node.replaceChildren(spoken, visual); counters.observe(node);
+  });
+}
 const form = document.querySelector('#contact-form');
 if (form) {
   form.elements.started.value = String(Date.now());
