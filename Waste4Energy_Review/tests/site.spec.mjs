@@ -88,7 +88,7 @@ test('solution photograph drifts on scroll without exposing its edges and respec
   await expect(photo).not.toHaveCSS('transform','none');
   const before=await photo.evaluate(e=>new DOMMatrix(getComputedStyle(e).transform).m42);
   await page.mouse.wheel(0,150);
-  await expect.poll(()=>photo.evaluate(e=>new DOMMatrix(getComputedStyle(e).transform).m42)).not.toBe(before);
+  await expect.poll(async()=>Math.abs(await photo.evaluate(e=>new DOMMatrix(getComputedStyle(e).transform).m42)-before)).toBeGreaterThan(35);
   expect(await frame.evaluate(e=>{const a=e.getBoundingClientRect(),b=e.querySelector('img').getBoundingClientRect();return b.top<=a.top&&b.bottom>=a.bottom})).toBe(true);
   await page.emulateMedia({reducedMotion:'reduce'});await expect(frame).not.toHaveClass(/parallax-active/);await expect(photo).toHaveCSS('transform','none');
 });
