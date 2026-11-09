@@ -149,45 +149,19 @@
     "process": [
       {
         "title": "Receiving & Shredding",
-        "icon": "truck",
-        "items": [
-          "Feeding Hopper",
-          "Input Conveyor",
-          "Quad Shredder",
-          "Vib Pan",
-          "Discharge Conveyor",
-          "Overhead Magnet",
-          "Tail Mag Pulley",
-          "Feeding Conveyor"
-        ]
+        "icon": "truck"
       },
       {
         "title": "Lab & Equipment",
-        "icon": "flask-conical",
-        "items": [
-          "Sampling Equipment",
-          "Sawdust Auto Dosing",
-          "Sawdust Silos"
-        ]
+        "icon": "flask-conical"
       },
       {
         "title": "Blending & Densification",
-        "icon": "recycle",
-        "items": [
-          "Six proportioning bins",
-          "Blending Machine (rotating tube)",
-          "Densification Extruder",
-          "Cooling Heat Exchanger"
-        ]
+        "icon": "recycle"
       },
       {
         "title": "Product Storage",
-        "icon": "warehouse",
-        "items": [
-          "Material Conveying to Silos",
-          "Finished Product drive thru silos",
-          "Packaging gaylord/bag (if needed)"
-        ]
+        "icon": "warehouse"
       }
     ],
     "diagram": {
@@ -212,34 +186,116 @@
         }
       ],
       "phase1": "Phase 1",
-      "phase1Items": [
-        "Land",
-        "Building",
-        "Truck scale",
-        "Break trailer",
-        "Site utilities",
-        "Stormwater pond discharge equip",
-        "Rubber lined pits",
-        "Shredding Line",
-        "Mobile Equipment",
-        "Modular Baghouse"
+      "phase1Groups": [
+        {
+          "title": "Receiving Building",
+          "start": 1,
+          "items": [
+            {
+              "title": "Land"
+            },
+            {
+              "title": "Building"
+            },
+            {
+              "title": "Truck scale"
+            },
+            {
+              "title": "Break trailer"
+            },
+            {
+              "title": "Site utilities"
+            },
+            {
+              "title": "Stormwater pond discharge equip"
+            },
+            {
+              "title": "Rubber lined pits"
+            },
+            {
+              "title": "Shredding Line",
+              "subitems": [
+                "Feeding Hopper",
+                "Input Conveyor",
+                "Quad Shredder",
+                "Vib Pan",
+                "Discharge Conveyor",
+                "Overhead Magnet",
+                "Tail Mag Pulley",
+                "Feeding Conveyor"
+              ]
+            },
+            {
+              "title": "Mobile Equipment"
+            },
+            {
+              "title": "Modular Baghouse",
+              "subitems": [
+                "Pit Hoods",
+                "Shredder Hood",
+                "Ducting",
+                "HEPA Filter"
+              ]
+            }
+          ]
+        }
       ],
       "phase2": "Phase 2 Additions",
-      "phase2Items": [
-        "Lab & Equipment",
-        "Pit Agitation & Discharge",
-        "Sawdust Auto Dosing",
-        "Sawdust Silos",
-        "Sampling Equipment",
-        "Blending & Densification",
-        "Six proportioning bins",
-        "Input/Output from bins",
-        "Blending Machine (rotating tube)",
-        "Densification Extruder",
-        "Cooling Heat Exchanger",
-        "Material Conveying to Silos",
-        "Finished Product drive thru silos",
-        "Water Heat Exchanger"
+      "phase2Groups": [
+        {
+          "title": "Receiving Building",
+          "start": 1,
+          "items": [
+            {
+              "title": "Lab & Equipment"
+            },
+            {
+              "title": "Pit Agitation & Discharge"
+            },
+            {
+              "title": "Sawdust Auto Dosing"
+            },
+            {
+              "title": "Sawdust Silos"
+            },
+            {
+              "title": "Sampling Equipment"
+            }
+          ]
+        },
+        {
+          "title": "Blending & Densification",
+          "start": 6,
+          "items": [
+            {
+              "title": "Building"
+            },
+            {
+              "title": "Six proportioning bins"
+            },
+            {
+              "title": "Input/Output from bins"
+            },
+            {
+              "title": "Blending Machine (rotating tube)"
+            },
+            {
+              "title": "Densification Extruder"
+            },
+            {
+              "title": "Cooling Heat Exchanger"
+            },
+            {
+              "title": "Material Conveying to Silos"
+            },
+            {
+              "title": "Finished Product drive thru silos"
+            },
+            {
+              "title": "Water Heat Exchanger"
+            }
+          ]
+        }
       ],
       "unknown": "Unknown Equipment",
       "unknownItems": [

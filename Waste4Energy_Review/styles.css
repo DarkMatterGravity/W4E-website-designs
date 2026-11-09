@@ -66,3 +66,18 @@
 .solution-image{position:relative}
 .solution-image.parallax-active img{position:absolute;left:0;top:-200px;height:calc(100% + 400px);will-change:transform}
 @media(max-width:760px){.solution-image.parallax-active img{top:-100px;height:calc(100% + 200px)}}
+
+.process{padding-block:4.5rem}
+.process .section-head{margin-bottom:2.5rem}
+.process .section-head h2{margin-bottom:0}
+.process .step-icon{width:72px;height:72px;margin-bottom:1rem}
+.process-step h3{margin-bottom:0}
+.plans{align-items:start}
+.phase-group{margin-block:1.5rem 2rem}
+.phase-group h3{font-family:var(--body-font);font-size:.88rem;font-weight:600;color:var(--teal);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--pale)}
+.equipment-list>li{padding-left:.2rem;margin-bottom:.35rem}
+.equipment-sublist{padding-left:1.45rem;margin-block:.55rem .85rem;list-style-type:lower-alpha}
+.equipment-sublist li{margin-bottom:.2rem}
+.unknown-equipment>.section-head{margin-bottom:1.5rem}
+.unknown-equipment-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:start}
+@media(max-width:760px){.process{padding-block:3rem}.unknown-equipment-grid{grid-template-columns:1fr;gap:1.5rem}}

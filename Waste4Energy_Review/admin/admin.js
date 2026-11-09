@@ -23,6 +23,7 @@ function fields(value,path,parent){
     parent.append(wrap);return;
   }
   for(const [key,v] of Object.entries(value)){
+    if(typeof v==='number')continue;
     if(typeof v==='string')fields(v,[...path,key],parent);
     else{const group=document.createElement('fieldset');const legend=document.createElement('legend');legend.textContent=Array.isArray(value)?`${Number(key)+1}${v.name?' · '+v.name:v.title?' · '+v.title:''}`:label(key);group.append(legend);fields(v,[...path,key],group);parent.append(group);}
   }

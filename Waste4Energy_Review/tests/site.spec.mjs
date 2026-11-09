@@ -92,6 +92,24 @@ test('solution photograph drifts on scroll without exposing its edges and respec
   expect(await frame.evaluate(e=>{const a=e.getBoundingClientRect(),b=e.querySelector('img').getBoundingClientRect();return b.top<=a.top&&b.bottom>=a.bottom})).toBe(true);
   await page.emulateMedia({reducedMotion:'reduce'});await expect(frame).not.toHaveClass(/parallax-active/);await expect(photo).toHaveCSS('transform','none');
 });
+test('equipment notes preserve the PDF hierarchy and Unknown Equipment is expanded',async({page})=>{
+  await page.goto('/technology.html');
+  await expect(page.locator('.process-step')).toHaveCount(4);await expect(page.locator('.process-step ul')).toHaveCount(0);
+  await expect(page.locator('.phase-one .phase-group h3')).toHaveText('Receiving Building');
+  const phaseOne=page.locator('.phase-one .phase-group > .equipment-list > li');await expect(phaseOne).toHaveCount(10);
+  await expect(phaseOne.nth(7).locator('.equipment-sublist > li')).toHaveCount(8);
+  await expect(phaseOne.nth(9).locator('.equipment-sublist > li')).toHaveCount(4);
+  await expect(page.locator('.phase-two .phase-group h3')).toHaveText(['Receiving Building','Blending & Densification']);
+  const phaseTwo=page.locator('.phase-two .phase-group');await expect(phaseTwo.first().locator('.equipment-list > li')).toHaveCount(5);
+  await expect(phaseTwo.nth(1).locator('.equipment-list')).toHaveAttribute('start','6');
+  await expect(phaseTwo.nth(1).locator('.equipment-list > li').first()).toHaveText('Building');
+  await expect(phaseTwo.nth(1).locator('.equipment-list > li')).toHaveCount(9);
+  const unknown=page.locator('.unknown-equipment');await expect(unknown).toBeVisible();
+  expect(await unknown.evaluate(e=>e.tagName)).toBe('SECTION');await expect(unknown.locator('.equipment-list')).toHaveAttribute('start','15');
+  await expect(unknown.locator('.equipment-list > li')).toHaveCount(12);
+  await expect(unknown.locator('.equipment-list > li').first()).toHaveText('Packaging Machine (gaylord/bags)');
+  await expect(unknown.locator('.equipment-list > li').last()).toHaveText('Product Classification Loop');
+});
 test('executive portraits clip to circles, keep their hover zoom and loop an eased ring rotation',async({page})=>{
   await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/about.html');
   const portrait=page.locator('.portrait').first(),zoom=portrait.locator('.portrait-zoom'),ring=portrait.locator('.portrait-ring');
