@@ -81,3 +81,19 @@
 .unknown-equipment>.section-head{margin-bottom:1.5rem}
 .unknown-equipment-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:start}
 @media(max-width:760px){.process{padding-block:3rem}.unknown-equipment-grid{grid-template-columns:1fr;gap:1.5rem}}
+
+.phase-group{margin:0;border-bottom:1px solid var(--pale)}
+.phase-group>summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:60px;padding:1rem 0;list-style:none;cursor:pointer}
+.phase-group>summary::-webkit-details-marker{display:none}
+.phase-group>summary h3{margin:0;padding:0;border:0}
+.phase-group>summary:hover h3{color:var(--forest)}
+.phase-group>summary:focus-visible{outline:3px solid var(--teal);outline-offset:4px}
+.phase-toggle{position:relative;display:block;width:24px;height:24px;flex:0 0 24px;color:var(--teal)}
+.phase-toggle::before,.phase-toggle::after{content:'';position:absolute;left:5px;right:5px;top:11px;height:2px;background:currentColor;transition:transform .2s ease-out}
+.phase-toggle::after{transform:rotate(90deg)}
+.phase-group[open]>summary .phase-toggle::after{transform:rotate(0deg)}
+.phase-group-content{padding:0 .25rem 1.25rem}
+.phase-group-content .equipment-list{margin-bottom:0}
+.phase-group-content>a,.phase-plan>a{display:block;margin-top:1.5rem}
+.phase-group[open]>.phase-group-content{animation:phase-expand .25s cubic-bezier(.16,1,.3,1)}
+@keyframes phase-expand{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
