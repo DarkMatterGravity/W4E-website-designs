@@ -92,23 +92,31 @@ test('solution photograph drifts on scroll without exposing its edges and respec
   expect(await frame.evaluate(e=>{const a=e.getBoundingClientRect(),b=e.querySelector('img').getBoundingClientRect();return b.top<=a.top&&b.bottom>=a.bottom})).toBe(true);
   await page.emulateMedia({reducedMotion:'reduce'});await expect(frame).not.toHaveClass(/parallax-active/);await expect(photo).toHaveCSS('transform','none');
 });
-test('equipment notes preserve the PDF hierarchy and Unknown Equipment is expanded',async({page})=>{
+test('phase notes expand independently and Unknown Equipment belongs to Phase 2',async({page})=>{
   await page.goto('/technology.html');
   await expect(page.locator('.process-step')).toHaveCount(4);await expect(page.locator('.process-step ul')).toHaveCount(0);
   await expect(page.locator('.phase-one .phase-group h3')).toHaveText('Receiving Building');
-  const phaseOne=page.locator('.phase-one .phase-group > .equipment-list > li');await expect(phaseOne).toHaveCount(10);
+  const firstGroup=page.locator('.phase-one .phase-group');await expect(firstGroup).not.toHaveAttribute('open','');
+  await firstGroup.locator('summary').click();await expect(firstGroup).toHaveAttribute('open','');
+  const phaseOne=page.locator('.phase-one .phase-group .phase-group-content > .equipment-list > li');await expect(phaseOne).toHaveCount(10);
   await expect(phaseOne.nth(7).locator('.equipment-sublist > li')).toHaveCount(8);
   await expect(phaseOne.nth(9).locator('.equipment-sublist > li')).toHaveCount(4);
-  await expect(page.locator('.phase-two .phase-group h3')).toHaveText(['Receiving Building','Blending & Densification']);
+  await expect(page.locator('.phase-two .phase-group h3')).toHaveText(['Receiving Building','Blending & Densification','Unknown Equipment']);
   const phaseTwo=page.locator('.phase-two .phase-group');await expect(phaseTwo.first().locator('.equipment-list > li')).toHaveCount(5);
   await expect(phaseTwo.nth(1).locator('.equipment-list')).toHaveAttribute('start','6');
   await expect(phaseTwo.nth(1).locator('.equipment-list > li').first()).toHaveText('Building');
   await expect(phaseTwo.nth(1).locator('.equipment-list > li')).toHaveCount(9);
-  const unknown=page.locator('.unknown-equipment');await expect(unknown).toBeVisible();
-  expect(await unknown.evaluate(e=>e.tagName)).toBe('SECTION');await expect(unknown.locator('.equipment-list')).toHaveAttribute('start','15');
+  await phaseTwo.first().locator('summary').click();await expect(phaseTwo.first()).toHaveAttribute('open','');
+  const unknown=page.locator('.phase-two .unknown-equipment');await expect(unknown.locator('.equipment-list')).not.toBeVisible();
+  expect(await unknown.evaluate(e=>e.tagName)).toBe('DETAILS');
+  await unknown.locator('summary').focus();await page.keyboard.press('Enter');await expect(unknown).toHaveAttribute('open','');
+  await expect(unknown.locator('.equipment-list')).toBeVisible();await expect(unknown.locator('.equipment-list')).toHaveAttribute('start','15');
   await expect(unknown.locator('.equipment-list > li')).toHaveCount(12);
   await expect(unknown.locator('.equipment-list > li').first()).toHaveText('Packaging Machine (gaylord/bags)');
   await expect(unknown.locator('.equipment-list > li').last()).toHaveText('Product Classification Loop');
+  await page.keyboard.press('Enter');await expect(unknown).not.toHaveAttribute('open','');
+  await expect(phaseTwo.first()).toHaveAttribute('open','');
+  await expect(page.locator('.unknown-equipment h2')).toHaveCount(0);
 });
 test('executive portraits clip to circles, keep their hover zoom and loop an eased ring rotation',async({page})=>{
   await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/about.html');
