@@ -1,3 +1,11 @@
 *.docx
 *.pptx
 .claude/
+.local/
+node_modules/
+Waste4Energy_Review/dist/
+Waste4Energy_Review/dist-icon/
+Waste4Energy_Review/exports/
+Waste4Energy_Review/server-config.php
+Waste4Energy_Review/test-results/
+Waste4Energy_Review/playwright-report/

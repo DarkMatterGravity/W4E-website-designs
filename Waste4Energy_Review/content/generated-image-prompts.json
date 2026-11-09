@@ -1,0 +1,40 @@
+{
+  "method": "OpenAI image generation",
+  "reference_images_used": false,
+  "usage": "New industry photographs for Targeted Waste Streams, replacing the presentation's stock photographs.",
+  "shared_direction": "Original square photorealistic industrial editorial photographs, natural neutral colors, diffused daylight, centered composition suitable for circular crops; no text, labels, logos, watermarks, collages or graphic overlays.",
+  "images": [
+    {
+      "asset": "assets/generated-paints.webp",
+      "prompt": "A new overhead-oblique composition of four well-used open metal paint cans in a workshop containment tray, showing slate-blue, off-white and muted green residual paint, dried splashes on rims and one wooden stirrer. Industrial recycling feedstock, tactile metal and liquid textures, softly blurred concrete workshop background."
+    },
+    {
+      "asset": "assets/generated-carbon-black.webp",
+      "prompt": "Macro industrial material photograph of fine matte black carbon-black pellets and powder mounded in a shallow stainless-steel sample tray. Dense small granular texture, a metal scoop partly visible at the rear, softly blurred processing equipment. It must read as carbon-black raw material, not shiny coal boulders or food."
+    },
+    {
+      "asset": "assets/generated-inks.webp",
+      "prompt": "Close industrial photograph of glossy black printing ink stretching from the tip of a raised metal mixing blade into a small steel ink pot on an ink-stained workbench. A few subtle cyan and magenta pigment stains nearby, blurred printing machinery in the background. No packaging brands or readable writing."
+    },
+    {
+      "asset": "assets/generated-consumer-products.webp",
+      "prompt": "Close documentary photograph of discarded generic consumer electronics and product components collected for recycling: coiled black and white cables, a small unbranded plastic appliance housing, circuit-board fragments, and rigid packaging in a shallow sorting bin. New balanced composition, visible signs of use, no branded products or readable labels."
+    },
+    {
+      "asset": "assets/generated-oily-sludges.webp",
+      "prompt": "Industrial close-up of viscous brown-black oily sludge in an open rectangular steel receiving tray at a waste-processing facility. Uneven thick surface, subtle reflective oil sheen, small clumps and a collection pipe softly out of focus behind. Realistic, restrained industrial photograph, no dramatic smoke or spills outside containment."
+    },
+    {
+      "asset": "assets/generated-pesticides-herbicides.webp",
+      "prompt": "Professional documentary photograph of several sealed unbranded agricultural-chemical HDPE jugs in a clean secondary-containment tray in a farm chemical storage shed. Off-white jugs with green and dark caps, a blurred agricultural sprayer beyond an open doorway, soft green rural background. No food, no visible text or commercial labels, no people."
+    },
+    {
+      "asset": "assets/generated-isocyanates.webp",
+      "prompt": "Industrial documentary photograph of four unbranded blue HDPE chemical jerrycans of differing sizes with white screw caps on a black containment pallet in a processing warehouse. Pipes and steel tanks softly blurred in the background. New tidy staggered arrangement, worn realistic surfaces, no labels or logos."
+    },
+    {
+      "asset": "assets/generated-industrial-plant-trash.webp",
+      "prompt": "Natural daylight editorial photograph of mixed non-hazardous industrial plant waste at a recycling yard: weathered wood offcuts, rigid plastic scraps, cardboard and metal remnants in a contained sorting bay, with part of a yellow wheel loader visible behind. New elevated three-quarter composition, cloudy sky, no people, no brands or text."
+    }
+  ]
+}

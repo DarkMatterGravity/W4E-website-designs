@@ -1,0 +1,391 @@
+{
+  "brand": {
+    "name": "Waste4Energy",
+    "legalName": "Waste4Energy, LLC.",
+    "palette": {
+      "cyan": "#1AB6E8",
+      "teal": "#1E7586",
+      "forest": "#399661",
+      "sapling": "#8FC85F",
+      "soil": "#352D21",
+      "white": "#FFFFFF",
+      "pale": "#D0EAF4",
+      "muted": "#5A5347",
+      "light": "#F8FAFB"
+    },
+    "fonts": {
+      "heading": "Libre Baskerville",
+      "body": "Montserrat"
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "technology": "Technology",
+    "about": "About",
+    "contact": "Contact",
+    "cta": "Get Started"
+  },
+  "home": {
+    "hero": {
+      "heading": "Waste Becomes Engineered Fuel",
+      "text": "Innovative recycling that transforms non-hazardous waste into alternative, eco-friendly fuels for cement kilns.",
+      "primary": "Request Consultation",
+      "secondary": "Learn More"
+    },
+    "stats": [
+      {
+        "number": "254M",
+        "label": "Tons of solid waste annually"
+      },
+      {
+        "number": "140M",
+        "label": "Tons going to landfills"
+      },
+      {
+        "number": "3",
+        "label": "Strategic sites"
+      },
+      {
+        "number": "200",
+        "label": "lbs of engineered fuel per ton of cement"
+      }
+    ],
+    "challenge": {
+      "label": "The Challenge",
+      "heading": "The Non Hazardous Waste Industry At A Glance",
+      "marketHeading": "US Market Share",
+      "markets": [
+        {
+          "number": "67%",
+          "label": "Landfill"
+        },
+        {
+          "number": "23%",
+          "label": "Incinerate for Electricity"
+        },
+        {
+          "number": "9%",
+          "label": "Alternative Fuels"
+        }
+      ],
+      "points": [
+        {
+          "text": "With the US producing over 254 million tons of solid waste annually and about 140 million tons going to landfills, the need for alternative waste management solutions is urgent.",
+          "icon": "trash"
+        },
+        {
+          "text": "Alternative Engineered Fuel volumes to rise from 297,000 to 502,000 tons (6.07%) by 2032.",
+          "icon": "flask-conical"
+        },
+        {
+          "text": "Rapidly emerging as a sustainable solution to diverting waste from landfills.",
+          "icon": "sprout"
+        }
+      ]
+    },
+    "solution": {
+      "label": "Our Solution",
+      "heading": "From Waste to Engineered Fuel",
+      "features": [
+        {
+          "title": "Innovative recycling",
+          "text": "Transforms non-hazardous waste into alternative, eco-friendly fuels for cement kilns."
+        },
+        {
+          "title": "Energy recovery",
+          "text": "Enhance energy recovery using innovative recycling."
+        },
+        {
+          "title": "Sustainability",
+          "text": "Championing sustainability, excellence, and efficiency."
+        }
+      ],
+      "link": "Technology"
+    },
+    "streams": {
+      "label": "Feedstocks",
+      "heading": "Targeted Waste Streams",
+      "items": [
+        {
+          "title": "Paints",
+          "image": "generated-paints.webp"
+        },
+        {
+          "title": "Carbon black",
+          "image": "generated-carbon-black.webp"
+        },
+        {
+          "title": "Inks",
+          "image": "generated-inks.webp"
+        },
+        {
+          "title": "Consumer products",
+          "image": "generated-consumer-products.webp"
+        },
+        {
+          "title": "Oily sludges",
+          "image": "generated-oily-sludges.webp"
+        },
+        {
+          "title": "Pesticides and herbicides",
+          "image": "generated-pesticides-herbicides.webp"
+        },
+        {
+          "title": "Isocyanates",
+          "image": "generated-isocyanates.webp"
+        },
+        {
+          "title": "Industrial plant trash",
+          "image": "generated-industrial-plant-trash.webp"
+        }
+      ]
+    }
+  },
+  "technology": {
+    "label": "Technology",
+    "heading": "Why Cement Plants Need Alternative Fuels",
+    "description": "200 lbs of engineered fuel per ton of cement made added instead of coal.",
+    "processHeading": "From Waste to Engineered Fuel",
+    "process": [
+      {
+        "title": "Receiving & Shredding",
+        "icon": "truck"
+      },
+      {
+        "title": "Sampling in the Lab",
+        "icon": "flask-conical"
+      },
+      {
+        "title": "Blending & Densification",
+        "icon": "recycle"
+      },
+      {
+        "title": "Product Storage",
+        "icon": "warehouse"
+      }
+    ],
+    "diagram": {
+      "alt": "Cement manufacturing from quarry, crusher, transport and raw mill through kiln and preheater/precalcinator, cooler, cement mill and logistics. Engineered fuel is injected at the preheater/precalcinator. CO2 emissions: 3%, 51% chemical calcination process, 34% fuels for heat, and 12%.",
+      "open": "Engineered Fuel Injection Point"
+    },
+    "site": {
+      "label": "Site Pitch",
+      "heading": "30,000 NT/yr capacity",
+      "facts": [
+        {
+          "number": "195,000",
+          "label": "sqft total site (4.5 acre)"
+        },
+        {
+          "number": "17,600",
+          "label": "sqft building (0.4 acre)"
+        },
+        {
+          "number": "+3,500",
+          "label": "sqft (0.1 acre)"
+        }
+      ],
+      "phase1": "Phase 1",
+      "phase1Groups": [
+        {
+          "title": "Receiving Building",
+          "start": 1,
+          "items": [
+            {
+              "title": "Land"
+            },
+            {
+              "title": "Building"
+            },
+            {
+              "title": "Truck scale"
+            },
+            {
+              "title": "Break trailer"
+            },
+            {
+              "title": "Site utilities"
+            },
+            {
+              "title": "Stormwater pond discharge equip"
+            },
+            {
+              "title": "Rubber lined pits"
+            },
+            {
+              "title": "Shredding Line",
+              "subitems": [
+                "Feeding Hopper",
+                "Input Conveyor",
+                "Quad Shredder",
+                "Vib Pan",
+                "Discharge Conveyor",
+                "Overhead Magnet",
+                "Tail Mag Pulley",
+                "Feeding Conveyor"
+              ]
+            },
+            {
+              "title": "Mobile Equipment"
+            },
+            {
+              "title": "Modular Baghouse",
+              "subitems": [
+                "Pit Hoods",
+                "Shredder Hood",
+                "Ducting",
+                "HEPA Filter"
+              ]
+            }
+          ]
+        }
+      ],
+      "phase2": "Phase 2 Additions",
+      "phase2Groups": [
+        {
+          "title": "Receiving Building",
+          "start": 1,
+          "items": [
+            {
+              "title": "Lab & Equipment"
+            },
+            {
+              "title": "Pit Agitation & Discharge"
+            },
+            {
+              "title": "Sawdust Auto Dosing"
+            },
+            {
+              "title": "Sawdust Silos"
+            },
+            {
+              "title": "Sampling Equipment"
+            }
+          ]
+        },
+        {
+          "title": "Blending & Densification",
+          "start": 6,
+          "items": [
+            {
+              "title": "Building"
+            },
+            {
+              "title": "Six proportioning bins"
+            },
+            {
+              "title": "Input/Output from bins"
+            },
+            {
+              "title": "Blending Machine (rotating tube)"
+            },
+            {
+              "title": "Densification Extruder"
+            },
+            {
+              "title": "Cooling Heat Exchanger"
+            },
+            {
+              "title": "Material Conveying to Silos"
+            },
+            {
+              "title": "Finished Product drive thru silos"
+            },
+            {
+              "title": "Water Heat Exchanger"
+            }
+          ]
+        }
+      ],
+      "unknown": "Unknown Equipment",
+      "unknownItems": [
+        "Packaging Machine (gaylord/bags)",
+        "Pre/post shredder",
+        "Material Sorting Equipment (Al, Cu)",
+        "Blend Material Offloading & Storage",
+        "Additional Solidification Pits",
+        "Admin Building",
+        "Post Shredder Discharge",
+        "Water Treatment System",
+        "Additional Air Emission System",
+        "Generator",
+        "Warehouse",
+        "Product Classification Loop"
+      ]
+    }
+  },
+  "about": {
+    "label": "About",
+    "heading": "Waste4Energy, LLC.",
+    "intro": "Backed by 4 executives with expertise in waste management, recycling, and land development, W4E is positioned to provide innovative recycling to the projected demand exceeding 100,000 tons in 2 undisclosed territory by 2026, leveraging the team's, comprehensive knowledge, and industry connections for substantial growth.",
+    "teamHeading": "Meet the Executive Team",
+    "team": [
+      {
+        "name": "Paul Bordelon",
+        "role": "Chief Executive Officer",
+        "image": "paul-bordelon.png",
+        "bio": [
+          "Over 15 years of experience in corporate sales, environmental services, and project management.",
+          "Proven track record in achieving business growth, operational excellence, and establishing national contracts with Fortune 500 companies."
+        ]
+      },
+      {
+        "name": "Jeff Gloyd",
+        "role": "Chief Operations Officer",
+        "image": "jeff-gloyd.png",
+        "bio": [
+          "Over 25 years of experience managing and building waste processing companies in both private and Fortune 500 sectors.",
+          "Proven track record of establishing the largest e-scrap processor in North America and managing international sales teams."
+        ]
+      },
+      {
+        "name": "Torry Ingram",
+        "role": "Chief Sales Officer",
+        "image": "torry-ingram.png",
+        "bio": [
+          "Two decades of experience in the hazardous and non-hazardous waste industry.",
+          "Past ten years focused on supplying and managing tens of thousands of tons of waste fuels for cement kilns."
+        ]
+      },
+      {
+        "name": "Grant Williams",
+        "role": "Strategic Consultant",
+        "image": "grant-williams.png",
+        "bio": [
+          "Since 2018, has worked for JW Development on site analysis and selection for projects in Texas, Florida, and North Carolina.",
+          "Evaluates all aspects of land feasibility for private joint ventures and multi-billion-dollar REITs."
+        ]
+      }
+    ],
+    "vision": {
+      "label": "Our Roadmap",
+      "heading": "Our Vision",
+      "text": "By building three strategic sites in Texas, Alabama, and the Western US by 2026, we will revolutionize waste management, enhance energy recovery using innovative recycling that transforms non-hazardous waste into alternative, eco-friendly fuels for cement kilns, championing sustainability, excellence, and efficiency.",
+      "locations": [
+        "Texas",
+        "Alabama",
+        "Western US"
+      ],
+      "mapHeading": "Areas of Focus",
+      "mapAlt": "Presentation areas of focus map highlighting Texas, Alabama and Nevada in the Western US. Texas is labeled 500K tons and Alabama 100K tons."
+    }
+  },
+  "contact": {
+    "label": "Get Started",
+    "heading": "Ready to Transform Your Waste Into Value?",
+    "consultation": "Request Consultation",
+    "evaluation": "Request Waste Evaluation",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "company": "Company",
+      "phone": "Phone",
+      "type": "Request",
+      "message": "Message",
+      "submit": "Contact Us",
+      "sending": "Sendingâ€¦",
+      "success": "Thank you. Your request has been sent.",
+      "failure": "Your request could not be sent. Please try again later."
+    }
+  }
+}
