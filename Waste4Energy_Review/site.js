@@ -122,6 +122,36 @@ if ('IntersectionObserver' in window && !counterReduced.matches) {
     counterReduced.addEventListener('change', () => { if (counterReduced.matches) finish(); });
   });
 }
+const solutionImage = document.querySelector('.solution-image');
+if (solutionImage && 'IntersectionObserver' in window) {
+  const photo = solutionImage.querySelector('img');
+  let active = false, frame = 0;
+  function renderParallax() {
+    frame = 0;
+    if (!active || counterReduced.matches) return;
+    const rect = solutionImage.getBoundingClientRect();
+    const progress = Math.max(-1, Math.min(1, (innerHeight / 2 - rect.top - rect.height / 2) / ((innerHeight + rect.height) / 2)));
+    const distance = Math.min(50, rect.height * .14);
+    photo.style.transform = `translate3d(0,${(progress * distance).toFixed(2)}px,0)`;
+  }
+  function requestParallax() {
+    if (active && !frame && !counterReduced.matches) frame = requestAnimationFrame(renderParallax);
+  }
+  function syncParallaxPreference() {
+    solutionImage.classList.toggle('parallax-active', !counterReduced.matches);
+    if (counterReduced.matches) {
+      cancelAnimationFrame(frame); frame = 0; photo.style.removeProperty('transform');
+    } else requestParallax();
+  }
+  new IntersectionObserver(entries => {
+    active = entries[0].isIntersecting;
+    if (active) requestParallax(); else { cancelAnimationFrame(frame); frame = 0; }
+  }).observe(solutionImage);
+  addEventListener('scroll', requestParallax, {passive:true});
+  addEventListener('resize', requestParallax, {passive:true});
+  counterReduced.addEventListener('change', syncParallaxPreference);
+  syncParallaxPreference();
+}
 const form = document.querySelector('#contact-form');
 if (form) {
   form.elements.started.value = String(Date.now());

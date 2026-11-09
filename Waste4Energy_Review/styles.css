@@ -60,3 +60,8 @@
 @media(max-width:1000px){.challenge-grid{gap:2.5rem}}
 @media(max-width:850px){.challenge-grid{grid-template-columns:1fr;gap:3rem}.market-panel{max-width:440px;width:100%;margin-inline:auto}}
 @media(max-width:760px){.challenge-point{grid-template-columns:38px minmax(0,1fr);gap:1rem;padding:1.2rem}.challenge-symbol{width:38px;height:38px}.challenge-symbol .icon{width:23px;height:23px}.challenge-point p{font-size:.82rem}.market-chart{max-width:340px}}
+
+.technology-intro{padding-bottom:2rem}.technology-intro .section-head h1{margin-bottom:0}.diagram-section{padding-top:2rem}
+
+.solution-image{position:relative}
+.solution-image.parallax-active img{position:absolute;left:0;top:-60px;height:calc(100% + 120px);will-change:transform}
