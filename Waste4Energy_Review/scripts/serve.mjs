@@ -42,11 +42,13 @@ const server = http.createServer(async (req,res) => {
       res.writeHead(200,{'Content-Type':'application/zip','Content-Disposition':'attachment; filename="Waste4Energy-GoDaddy.zip"','Cache-Control':'no-store'});
       return res.end(Buffer.from(archive));
     }
-    if (url.pathname === '/contact.php') return json(503,{ok:false}); // Never fake email delivery in static preview.
+    if (['/contact.php','/with-icon/contact.php'].includes(url.pathname)) return json(503,{ok:false}); // Never fake email delivery in static preview.
     if (!['GET','HEAD'].includes(req.method)) return json(405,{error:'Method not allowed.'});
     const admin = url.pathname === '/admin' || url.pathname.startsWith('/admin/');
-    const base = admin ? path.join(root,'admin') : dist;
-    let relative = admin ? url.pathname.replace(/^\/admin\/?/,'') : url.pathname.slice(1);
+    if (url.pathname === '/with-icon') { res.writeHead(302,{Location:'/with-icon/'}); return res.end(); }
+    const withIcon = url.pathname.startsWith('/with-icon/');
+    const base = admin ? path.join(root,'admin') : withIcon ? path.join(root,'dist-icon') : dist;
+    let relative = admin ? url.pathname.replace(/^\/admin\/?/,'') : withIcon ? url.pathname.slice('/with-icon/'.length) : url.pathname.slice(1);
     if (!relative) relative = 'index.html';
     const full = path.resolve(base,decodeURIComponent(relative));
     if (!full.startsWith(base+path.sep) || full.endsWith('.php') || path.basename(full).startsWith('.')) return json(404,{error:'Not found.'});

@@ -59,7 +59,7 @@ test('hero depth responds in both directions, keeps text steady and disables for
   expect(await canvas.evaluate(e=>e.getContext('webgl').getError())).toBe(0);
   await page.emulateMedia({reducedMotion:'reduce'});await expect(hero).not.toHaveClass(/hero-depth-ready/);await expect(hero.locator('.hero-bg')).toHaveCSS('visibility','visible');
 });
-test('home figures tally on entry, preserve suffixes and do not restart on a second scroll',async({page})=>{
+test('home figures tally on every entry and preserve suffixes',async({page})=>{
   await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/');
   const market=page.locator('.market-legend .stat-number');
   await expect(market.first().locator('[aria-hidden]')).toHaveText('0%');
@@ -70,7 +70,7 @@ test('home figures tally on entry, preserve suffixes and do not restart on a sec
   await market.first().scrollIntoViewIfNeeded();await expect(market.first().locator('[aria-hidden]')).toHaveText('67%');
   await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await expect(page.locator('.hero-stats .stat-number').first()).toHaveText('254M');await expect(page.locator('.stat-number [aria-hidden]')).toHaveCount(0);
 });
-test('donut wipes clockwise once and tallies its percentages with the sector growth',async({page})=>{
+test('donut wipes clockwise on every entry and tallies its percentages with the sector growth',async({page})=>{
   await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/');
   const chart=page.locator('.market-chart'),wipe=chart.locator('.market-wipe');
   await expect(wipe).toHaveAttribute('stroke-dashoffset','100');
@@ -78,7 +78,7 @@ test('donut wipes clockwise once and tallies its percentages with the sector gro
   await expect.poll(async()=>Number(await wipe.getAttribute('stroke-dashoffset'))).toBeLessThan(100);
   await expect(chart).toHaveAttribute('data-chart-state','complete');await expect(wipe).toHaveAttribute('stroke-dashoffset','0');
   await expect(chart.locator('.market-percent-0')).toHaveText('67%');await expect(chart.locator('.market-percent-1')).toHaveText('23%');await expect(chart.locator('.market-percent-2')).toHaveText('9%');
-  await page.locator('.hero').scrollIntoViewIfNeeded();await chart.scrollIntoViewIfNeeded();await expect(chart).toHaveAttribute('data-chart-state','complete');
+  await page.locator('.hero').scrollIntoViewIfNeeded();await expect(chart).toHaveAttribute('data-chart-state','waiting');await chart.scrollIntoViewIfNeeded();await expect(chart).toHaveAttribute('data-chart-state','animating');await expect(chart).toHaveAttribute('data-chart-state','complete');
   await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await expect(page.locator('.market-wipe')).toHaveAttribute('stroke-dashoffset','0');
 });
 test('solution photograph drifts on scroll without exposing its edges and respects reduced motion',async({page})=>{
@@ -162,3 +162,23 @@ test('local editor rejects cross-origin writes and incomplete imported data',asy
   expect((await request.put('/api/content',{headers:{'X-CSRF-Token':state.csrf,'Origin':'https://example.com'},data:state.data})).status()).toBe(403);
   expect((await request.put('/api/content',{headers:{'X-CSRF-Token':state.csrf},data:{}})).status()).toBe(400);
 });
+
+for (const route of ['/', '/with-icon/']) {
+  test(`A/B logos and replay from both scroll directions: ${route}`, async({page})=>{
+    await page.emulateMedia({reducedMotion:'no-preference'});await page.goto(route);
+    await expect(page.locator('.hero-logo')).toBeVisible();
+    expect(await page.locator('.hero-logo').evaluate(e=>e.tagName.toLowerCase())).toBe(route==='/'?'svg':'img');
+    const counter=page.locator('.hero-stats .stat-number').first();
+    await counter.scrollIntoViewIfNeeded();await expect(counter).toHaveAttribute('data-counter-state','complete');
+    const chart=page.locator('.market-chart');await chart.scrollIntoViewIfNeeded();await expect(chart).toHaveAttribute('data-chart-state','complete');
+    await expect(counter).toHaveAttribute('data-counter-state','waiting');
+    await counter.scrollIntoViewIfNeeded();await expect(counter).toHaveAttribute('data-counter-state','animating');await expect(counter).toHaveAttribute('data-counter-state','complete');
+    await page.evaluate(()=>scrollTo(0,0));await expect(chart).toHaveAttribute('data-chart-state','waiting');
+    await chart.scrollIntoViewIfNeeded();await expect(chart).toHaveAttribute('data-chart-state','animating');await expect(chart).toHaveAttribute('data-chart-state','complete');
+    await page.locator('footer').scrollIntoViewIfNeeded();await expect(chart).toHaveAttribute('data-chart-state','waiting');
+    await chart.scrollIntoViewIfNeeded();await expect(chart).toHaveAttribute('data-chart-state','animating');await expect(chart).toHaveAttribute('data-chart-state','complete');
+    const photo=page.locator('.solution-image');await photo.scrollIntoViewIfNeeded();await expect(photo).toHaveClass(/visible/);
+    await page.locator('footer').scrollIntoViewIfNeeded();await expect(photo).not.toHaveClass(/visible/);
+    await photo.scrollIntoViewIfNeeded();await expect(photo).toHaveClass(/visible/);
+  });
+}

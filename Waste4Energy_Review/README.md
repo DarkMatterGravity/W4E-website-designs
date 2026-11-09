@@ -22,13 +22,13 @@ On Windows, you can also double-click `Start-Review.cmd`. [Review screenshots](r
 
 The editor is an internal local tool, not a public administration portal. Changes persist to the repository's JSON file. Commit and push that file to keep a shared history. No cloud account or database is required. Font selections include the original locally hosted Montserrat and Libre Baskerville and common system fonts. New custom fonts can be added by a developer.
 
-The Home hero uses the original photo with `assets/hero-depth.svg`, a grayscale depth mask, for subtle WebGL mouse parallax. The text remains fixed. Touch devices, reduced-motion preferences and unavailable WebGL keep the static photo. Home figures tally once as they enter view, preserving their original values and suffixes; reduced-motion mode displays final values immediately.
+The Home hero uses the original photo with `assets/hero-depth.svg`, a grayscale depth mask, for subtle WebGL mouse parallax. The text remains fixed. Touch devices, reduced-motion preferences and unavailable WebGL keep the static photo. Home figures tally each time they re-enter view, preserving their original values and suffixes; reduced-motion mode displays final values immediately.
 
-Targeted Waste Streams uses eight newly generated industry photos in optimized WebP format, replacing the presentation's stock photos. Prompts are recorded in `content/generated-image-prompts.json`. The market-share donut wipes clockwise once on entry, with its percentage labels and legend tallying in sync; reduced-motion mode shows the completed chart immediately.
+Targeted Waste Streams uses eight newly generated industry photos in optimized WebP format, replacing the presentation's stock photos. Prompts are recorded in `content/generated-image-prompts.json`. The market-share donut wipes clockwise on every entry, with its percentage labels and legend tallying in sync; reduced-motion mode shows the completed chart immediately.
 
 ## Publishing changes
 
-Every website change must also update the GitHub Pages preview at https://darkmattergravity.github.io/W4E-website-designs/Waste4Energy_Review/. Build the current source, publish the contents of `dist/` to `Waste4Energy_Review/` on the repository's `master` branch, and verify the deployed pages. Keep the internal editor out of the published directory. GoDaddy deployment remains manual.
+Every website change must also update the GitHub Pages preview at https://darkmattergravity.github.io/W4E-website-designs/Waste4Energy_Review/. Build the current source, publish `dist/` to `Waste4Energy_Review/` and `dist-icon/` to `Waste4Energy_With_Icon/` on the repository's `master` branch, and verify both deployed variants. See [A/B review links and build details](AB-REVIEW.md). Keep the internal editor out of the published directory. GoDaddy deployment remains manual.
 
 ## Build and checks
 
