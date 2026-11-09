@@ -130,9 +130,11 @@ if (solutionImage && 'IntersectionObserver' in window) {
     frame = 0;
     if (!active || counterReduced.matches) return;
     const rect = solutionImage.getBoundingClientRect();
-    const progress = Math.max(-1, Math.min(1, (innerHeight / 2 - rect.top - rect.height / 2) / ((innerHeight + rect.height) / 2)));
-    const distance = Math.min(50, rect.height * .14);
-    photo.style.transform = `translate3d(0,${(progress * distance).toFixed(2)}px,0)`;
+    const limit = matchMedia('(max-width:760px)').matches ? 90 : 180;
+    // Compensate for 40% of the frame's scroll: the photo visibly travels
+    // more slowly than the surrounding page, rather than barely shifting.
+    const offset = Math.max(-limit, Math.min(limit, (innerHeight / 2 - rect.top - rect.height / 2) * .4));
+    photo.style.transform = `translate3d(0,${offset.toFixed(2)}px,0)`;
   }
   function requestParallax() {
     if (active && !frame && !counterReduced.matches) frame = requestAnimationFrame(renderParallax);

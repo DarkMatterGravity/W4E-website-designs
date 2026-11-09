@@ -64,4 +64,5 @@
 .technology-intro{padding-bottom:2rem}.technology-intro .section-head h1{margin-bottom:0}.diagram-section{padding-top:2rem}
 
 .solution-image{position:relative}
-.solution-image.parallax-active img{position:absolute;left:0;top:-60px;height:calc(100% + 120px);will-change:transform}
+.solution-image.parallax-active img{position:absolute;left:0;top:-200px;height:calc(100% + 400px);will-change:transform}
+@media(max-width:760px){.solution-image.parallax-active img{top:-100px;height:calc(100% + 200px)}}
