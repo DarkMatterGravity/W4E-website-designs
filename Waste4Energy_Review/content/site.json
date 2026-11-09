@@ -144,7 +144,7 @@
   "technology": {
     "label": "Technology",
     "heading": "Why Cement Plants Need Alternative Fuels",
-    "intro": "200 lbs of engineered fuel per ton of cement made added instead of coal.",
+    "description": "200 lbs of engineered fuel per ton of cement made added instead of coal.",
     "processHeading": "From Waste to Engineered Fuel",
     "process": [
       {
@@ -191,9 +191,6 @@
       }
     ],
     "diagram": {
-      "label": "Clinker & Cement Manufacturing",
-      "heading": "Engineered Fuel Injection Point",
-      "text": "200 lbs of engineered fuel per ton of cement made added instead of coal.",
       "alt": "Cement manufacturing from quarry, crusher, transport and raw mill through kiln and preheater/precalcinator, cooler, cement mill and logistics. Engineered fuel is injected at the preheater/precalcinator. CO2 emissions: 3%, 51% chemical calcination process, 34% fuels for heat, and 12%.",
       "open": "Engineered Fuel Injection Point"
     },

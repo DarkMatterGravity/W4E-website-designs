@@ -81,6 +81,17 @@ test('donut wipes clockwise once and tallies its percentages with the sector gro
   await page.locator('.hero').scrollIntoViewIfNeeded();await chart.scrollIntoViewIfNeeded();await expect(chart).toHaveAttribute('data-chart-state','complete');
   await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await expect(page.locator('.market-wipe')).toHaveAttribute('stroke-dashoffset','0');
 });
+test('solution photograph drifts on scroll without exposing its edges and respects reduced motion',async({page})=>{
+  await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/');
+  const frame=page.locator('.solution-image'),photo=frame.locator('img');
+  await frame.scrollIntoViewIfNeeded();await expect(frame).toHaveClass(/parallax-active/);
+  await expect(photo).not.toHaveCSS('transform','none');
+  const before=await photo.evaluate(e=>new DOMMatrix(getComputedStyle(e).transform).m42);
+  await page.mouse.wheel(0,150);
+  await expect.poll(()=>photo.evaluate(e=>new DOMMatrix(getComputedStyle(e).transform).m42)).not.toBe(before);
+  expect(await frame.evaluate(e=>{const a=e.getBoundingClientRect(),b=e.querySelector('img').getBoundingClientRect();return b.top<=a.top&&b.bottom>=a.bottom})).toBe(true);
+  await page.emulateMedia({reducedMotion:'reduce'});await expect(frame).not.toHaveClass(/parallax-active/);await expect(photo).toHaveCSS('transform','none');
+});
 test('executive portraits clip to circles, keep their hover zoom and loop an eased ring rotation',async({page})=>{
   await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/about.html');
   const portrait=page.locator('.portrait').first(),zoom=portrait.locator('.portrait-zoom'),ring=portrait.locator('.portrait-ring');
